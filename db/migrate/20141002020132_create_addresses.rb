@@ -9,7 +9,7 @@ class CreateAddresses < ActiveRecord::Migration
       #id for these relationships
       t.integer :city, null: false
       t.integer :state, null: false
-      t.integer :user, null: false
+      t.integer :user_id, null: false
 
       t.timestamps
     end

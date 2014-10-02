@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
 
       t.string :first_name, null: false
       t.string :last_name, null: false
-      t.string :email, null: false, index: true
+      t.string :email, null: false, index: true, unique: true
       t.integer :billing_id
       t.integer :shipping_id
 
