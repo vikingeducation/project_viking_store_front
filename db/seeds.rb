@@ -155,10 +155,39 @@ end
 
 
 # populate a historical record of at least 100 orders staggered throughout the past year. Show growth in the rate of orders over time.
+#populate at least 25 shopping carts
+
+num_orders = 125 * SEED_MULTIPLIER
+
+0.upto(num_orders-1) do |order_id|
+  o = Order.new
+  o.userid = 0 #will change outside this loop
+
+  #shopping carts are just orders not yet checked out
+  o.checked_out = false if order_id < ( num_orders / 5 )
+
+  o.save
+end
+
+
+mins = 525949 #minutes in a year
+orders = Order.all
+
+#show growth in the rate of orders over time
+orders.each do |order|
+  order.created_at -= mins.minutes
+  order.save
+
+  #every time this iterates, date offset moves closer to the present
+  #curve moves slowly
+  mins = mins * 95 / 100
+end
 
 
 
+#TODO: set userids for orders,
+#assign shopping carts
+#create 3 times as many purchases as orders
 
+#OH and CREATE CREDIT CARDS
 
-
-# populate at least 25 active shopping carts
