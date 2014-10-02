@@ -66,6 +66,7 @@ u = User.all.to_a
       a.street_address = Faker::Address.street_address
       a.secondary_address = Faker::Address.secondary_address
       a.zip_code = Faker::Address.zip_code
+      #a.phone_number = Faker::PhoneNumber.phone_number
       a.city = 0 #setting these later
       a.state = 0 #setting these later
       a.user_id = u.last.id #the user on top of the stack
