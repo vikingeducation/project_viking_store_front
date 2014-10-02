@@ -185,9 +185,48 @@ end
 
 
 
-#TODO: set userids for orders,
-#assign shopping carts
+u = User.all
+
+#loop through all the shopping carts unassigned
+user_index = 0
+while Order.find_by(:checked_out => false, :user_id => 0)
+  o = Order.find_by(:checked_out => false, :user_id => 0)
+  o.user_id = user_index
+  o.save
+  user_index += 1 #make sure no user gets 2 carts
+end
+
+user_index = 0
+#loop through all orders unassigned to a user
+while Order.find_by(:checked_out => true, :user_id => 0)
+  o = Order.find_by(:checked_out => true, :user_id => 0)
+  
+  #if the user with specified index has a shipping and billing address entered,
+  #claim it for this order
+  if user[user_index].shipping_id && user[user_index].billing_id
+    o.user_id = user_index
+    order.shipping_id = user.shipping_id
+    order.billing_id = user.billing_id
+    order.save
+  end
+  
+  user_index += 2 #iterate through users so only some have carts AND orders
+  user_index = 0 if user_index >= u.size
+end
+
+
 #create 3 times as many purchases as orders
+0.upto(orders.size) do |order_id|
+  3.times do 
+    purchase = Purchase.new
+    
+    purchase.order_id = order_id
+    purchase.product_id = order_id % num_products #unpredictable, not random, spreads across all products
+    purchase.quantity = (order_id % 10) + 1  #unpredictable, but not random, and 1 - 10
+    purchase.save
+  end
+end
+
 
 #OH and CREATE CREDIT CARDS
 
