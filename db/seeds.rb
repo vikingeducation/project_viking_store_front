@@ -148,8 +148,10 @@ num_categories = 6 * SEED_MULTIPLIER
   #1/6 of products set to each category
   (num_products / 6).times do
     product = Product.find_by_category_id(0)
-    product.category_id = cid
-    product.save
+    if product
+      product.category_id = cid
+      product.save
+    end
   end
 
 end
