@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141002020309) do
+ActiveRecord::Schema.define(version: 20141003023038) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address",    null: false
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20141002020309) do
     t.integer  "user_id",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone_number"
   end
 
   create_table "categories", force: true do |t|
@@ -49,12 +50,13 @@ ActiveRecord::Schema.define(version: 20141002020309) do
   end
 
   create_table "orders", force: true do |t|
-    t.boolean  "checked_out", default: true, null: false
-    t.integer  "userid",                     null: false
+    t.boolean  "checked_out",   default: true, null: false
+    t.integer  "userid",                       null: false
     t.integer  "shipping_id"
     t.integer  "billing_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "checkout_date"
   end
 
   create_table "products", force: true do |t|

@@ -155,6 +155,9 @@ num_categories = 6 * SEED_MULTIPLIER
 end
 
 
+
+
+
 # populate a historical record of at least 100 orders staggered throughout the past year. Show growth in the rate of orders over time.
 #populate at least 25 shopping carts
 
@@ -176,12 +179,12 @@ orders = Order.all
 
 #show growth in the rate of orders over time
 orders.each do |order|
-  order.created_at -= mins.minutes
+  order.checkout_date = Time.now - mins.minutes
   order.save
 
   #every time this iterates, date offset moves closer to the present
-  #curve moves slowly
-  mins = mins * 95 / 100
+  #curve moves slowly, more slowly the more records there are
+  mins = mins * 95 / 100 / SEED_MULTIPLIER
 end
 
 
@@ -190,24 +193,24 @@ u = User.all
 
 #loop through all the shopping carts unassigned
 user_index = 0
-while Order.find_by(:checked_out => false, :user_id => 0)
-  o = Order.find_by(:checked_out => false, :user_id => 0)
-  o.user_id = user_index
+while Order.find_by(:checked_out => false, :userid => 0)
+  o = Order.find_by(:checked_out => false, :userid => 0)
+  o.userid = user_index
   o.save
   user_index += 1 #make sure no user gets 2 carts
 end
 
 user_index = 0
 #loop through all orders unassigned to a user
-while Order.find_by(:checked_out => true, :user_id => 0)
-  o = Order.find_by(:checked_out => true, :user_id => 0)
+while Order.find_by(:checked_out => true, :userid => 0)
+  order = Order.find_by(:checked_out => true, :userid => 0)
   
   #if the user with specified index has a shipping and billing address entered,
   #claim it for this order
-  if user[user_index].shipping_id && user[user_index].billing_id
-    o.user_id = user_index
-    order.shipping_id = user.shipping_id
-    order.billing_id = user.billing_id
+  if u[user_index].shipping_id && u[user_index].billing_id
+    order.userid = user_index
+    order.shipping_id = u[user_index].shipping_id
+    order.billing_id = u[user_index].billing_id
     order.save
   end
   
@@ -228,6 +231,4 @@ end
   end
 end
 
-
-#OH and CREATE CREDIT CARDS
 
