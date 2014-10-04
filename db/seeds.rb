@@ -175,18 +175,19 @@ num_orders = 125 * SEED_MULTIPLIER
   o.save
 end
 
+ #minutes in a year / num_orders =even distribution
+mins = 525949 / num_orders
 
-mins = 525949 #minutes in a year
 orders = Order.all
 
 #show growth in the rate of orders over time
 orders.each do |order|
-  order.checkout_date = Time.now - mins.minutes
+  order.checkout_date = Time.now - 1.year + mins.minutes
   order.save
 
   #every time this iterates, date offset moves closer to the present
   #curve moves slowly, more slowly the more records there are
-  mins = mins * 95 / 100
+  mins = mins
 end
 
 
