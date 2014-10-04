@@ -9,7 +9,7 @@
 
 # Make everything dynamic so you can just specify (hard code) a single "seed multiplier", e.g. 1 or 4 or 20 and it will scale up the size of all your seeds by that factor. This can be useful if you want to start with a very small seed but then ramp up to a huge database for performance testing.
 
-SEED_MULTIPLIER = 1
+SEED_MULTIPLIER = 100
 
 
 
@@ -186,7 +186,7 @@ orders.each do |order|
 
   #every time this iterates, date offset moves closer to the present
   #curve moves slowly, more slowly the more records there are
-  mins = mins * 95 / 100 / SEED_MULTIPLIER
+  mins = mins * 95 / 100
 end
 
 
