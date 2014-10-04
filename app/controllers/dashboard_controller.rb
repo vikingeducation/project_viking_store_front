@@ -4,6 +4,8 @@ class DashboardController < ApplicationController
     setup_overall_platform([30, 7, @all_time])
     @top_states = User.top_three_states
     @top_cities = User.top_three_cities
+
+    @top_order = User.top_order
   end
 
 

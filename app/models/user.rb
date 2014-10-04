@@ -16,15 +16,9 @@ class User < ActiveRecord::Base
     User.select("cities.name AS city_name, COUNT(*) AS users_in_city").joins("JOIN addresses ON users.billing_id = addresses.id JOIN cities ON cities.id = addresses.city").limit(3).order("users_in_city DESC").group("cities.name")
   end
 
+  def self.top_order
+    User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("orders.id").order("value DESC").limit(1).first
+  end
+
+
 end
-
-# .order("DESC")
-
-# .select("states.name, COUNT(*) AS users_in_state")
-
-# SELECT State.name, Count (*)
-# FROM User JOIN Address ON user.billing_address = address.id
-# JOIN State ON state.id = Address.state_id
-# GROUP BY state.id
-# ORDER BY COUNT(*) DESC
-# LIMIT 3
