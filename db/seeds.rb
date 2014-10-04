@@ -44,7 +44,8 @@ states =
 "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
  
 states.each do |state|
-  State.new({:name => state})
+  state = State.new({:name => state})
+  state.save
 end
  
 def sample_city # generates a new city/state/zip combination
