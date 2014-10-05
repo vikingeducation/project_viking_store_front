@@ -6,6 +6,9 @@ class DashboardController < ApplicationController
     @top_cities = User.top_three_cities
 
     @top_order = User.top_order
+    @highest_lifetime = User.highest_lifetime
+    @highest_average = User.highest_average_order
+    @most_orders = User.most_orders
   end
 
 

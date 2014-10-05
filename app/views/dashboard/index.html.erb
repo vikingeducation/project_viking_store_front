@@ -192,37 +192,42 @@
                 <%= @top_order.user_first_name + " " + @top_order.user_last_name %>
               </td>
               <td>
-                $<%= @top_order.value %>
+                $<%= number_with_precision(@top_order.value, :precision => 2, :delimiter => ',') %>
               </td>
             </tr>
             <tr>
               <td>Highest Lifetime Value</td>
               <td>
+                <%= @highest_lifetime.user_first_name + " " + @highest_lifetime.user_last_name %>
               </td>
-              <td></td>
-
+              <td>
+                $<%= number_with_precision(@highest_lifetime.value, :precision => 2, :delimiter => ',') %>
+              </td>
             </tr>
             <tr>
               <td>Highest Average Order Value</td>
               <td>
-
+                <%= @highest_average.user_first_name + " " + @highest_average.user_last_name %>
               </td>
-              <td></td>
-
+              <td>
+                $<%= number_with_precision(@highest_average.value, :precision => 2, :delimiter => ',') %>
+              </td>
             </tr>
             <tr>
               <td>Most Orders Placed</td>
               <td>
-
+                <%= @most_orders.user_first_name + " " + @most_orders.user_last_name %>
               </td>
-              <td></td>
+              <td>
+                <%= @most_orders.orders_placed %>
+              </td>
 
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div>
+  </div> <!-- Panel 2 -->
 </div>
 
 <div class="row">
