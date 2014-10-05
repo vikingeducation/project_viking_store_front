@@ -25,7 +25,12 @@ class User < ActiveRecord::Base
   end
 
   def self.highest_average_order
-    # this is the correct subquery: User.select("(users.id AS user_id, users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value) AS subquery").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("orders.id").order("value DESC")
+    User.select("users.id AS user_id, users.first_name AS user_first_name, users.last_name AS user_last_name, (SUM(purchases.quantity * products.price) / COUNT(DISTINCT orders.id)) AS value").
+        joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
+        where("orders.checked_out" => true).
+        group("users.id").
+        order("value DESC").
+        first
 
   end
 
