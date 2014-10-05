@@ -9,6 +9,13 @@ class DashboardController < ApplicationController
     @highest_lifetime = User.highest_lifetime
     @highest_average = User.highest_average_order
     @most_orders = User.most_orders
+
+    @order_days = []
+    @daily_revenue = []
+    (0..6).each do |x|
+      @order_days << Order.orders_on(x)
+      @daily_revenue << Order.daily_revenue(x)
+    end
   end
 
 
