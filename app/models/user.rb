@@ -24,9 +24,9 @@ class User < ActiveRecord::Base
     User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("users.id").order("value DESC").limit(1).first
   end
 
-  # def self.highest_average_order
-  #   User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, AVG(purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("users.id").order("value DESC").limit(1).first
-  # end
+  def self.highest_average_order
+    User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, AVG(purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("users.id").order("value DESC").limit(1).first
+  end
 
   def self.most_orders
     User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, COUNT(DISTINCT orders.id) AS orders_placed").joins("JOIN orders ON users.id = orders.userid").where("orders.checked_out" => true).group("users.id").order("orders_placed DESC").limit(1).first
@@ -40,20 +40,20 @@ class User < ActiveRecord::Base
   #   User.orders_by_value.select("users.first_name AS user_first_name, users.last_name AS user_last_name, AVG(value) AS average").group("users.id").order("average DESC").first
   # end
 
-  def self.highest_average_order
-    query = "SELECT order_values.uf1 AS user_first_name, order_values.ul1 AS user_last_name, AVG(order_values.ov) AS value
+  # def self.highest_average_order
+  #   query = "SELECT order_values.uf1 AS user_first_name, order_values.ul1 AS user_last_name, AVG(order_values.ov) AS value
 
-    FROM (SELECT users.id AS users_id, users.first_name AS uf1, users.last_name AS ul1, SUM(purchases.quantity * products.price) AS ov
-    FROM users JOIN orders ON users.id = orders.userid
-    JOIN purchases ON orders.id = purchases.order_id
-    JOIN products ON purchases.product_id = products.id
-    WHERE orders.checked_out = 'true'
-    GROUP BY orders.id) AS order_values
-    GROUP BY order_values.users_id
-    ORDER BY value DESC
-    "
+  # #   FROM (SELECT users.id AS users_id, users.first_name AS uf1, users.last_name AS ul1, SUM(purchases.quantity * products.price) AS ov
+  # #   FROM users JOIN orders ON users.id = orders.userid
+  # #   JOIN purchases ON orders.id = purchases.order_id
+  # #   JOIN products ON purchases.product_id = products.id
+  # #   WHERE orders.checked_out = 'true'
+  # #   GROUP BY orders.id) AS order_values
+  # #   GROUP BY order_values.users_id
+  # #   ORDER BY value DESC
+  # #   "
 
-    find_by_sql(query).first
-  end
+  #   find_by_sql(query)
+  # end
 
 end
