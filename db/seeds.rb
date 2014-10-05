@@ -4,7 +4,7 @@
 
 #scalar 10 => about 1,000 Cities, 1,000 Users, <1,000 Orders
 
-SCALAR = 10 # Seed multiplier; caution: exponential data increase
+SCALAR = 5 # Seed multiplier; caution: exponential data increase
  
 #generate products
 sample_categories = []
@@ -120,11 +120,11 @@ end
  
 #generate order contents
 def generate_contents(order_id)
-  (rand(SCALAR)+1).times do
+  (rand(10)+1).times do
     c = Purchase.new()
     c[:order_id]   = order_id
     c[:product_id] = rand(Product.count)+1
-    c[:quantity]   = rand(SCALAR)+1
+    c[:quantity]   = rand(10)+1
     c.save
   end
 end

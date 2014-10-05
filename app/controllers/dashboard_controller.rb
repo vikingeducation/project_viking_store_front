@@ -1,8 +1,11 @@
 class DashboardController < ApplicationController
   def index
     @all_time = nil
-    setup_overall_platform([30, 7, @all_time])
-    
+
+    #add extra days and it auto-generates new tables via partial
+    @time_frames = [7, 30, @all_time]
+    setup_overall_platform(@time_frames)
+
     @top_states = User.top_three_states
     @top_cities = User.top_three_cities
 
@@ -10,7 +13,6 @@ class DashboardController < ApplicationController
     @highest_lifetime = User.highest_lifetime
     @highest_average = User.highest_average_order
     @most_orders = User.most_orders
-
 
     setup_time_series(0..6)
   end
