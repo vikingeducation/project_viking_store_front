@@ -17,15 +17,16 @@ class User < ActiveRecord::Base
   end
 
   def self.top_order
-    User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("orders.id").order("value DESC").limit(1).first
+    User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("orders.id").order("value DESC").first
   end
 
   def self.highest_lifetime
-    User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, (purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("users.id").order("value DESC").limit(1).first
+    User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("users.id").order("value DESC").limit(1).first
   end
 
   def self.highest_average_order
-    User.select("users.first_name AS user_first_name, users.last_name AS user_last_name, AVG(purchases.quantity * products.price) AS value").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("users.id").order("value DESC").limit(1).first
+    # this is the correct subquery: User.select("(users.id AS user_id, users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value) AS subquery").joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").where("orders.checked_out" => true).group("orders.id").order("value DESC")
+
   end
 
   def self.most_orders
