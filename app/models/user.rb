@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   def self.top_order
     select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").
-      joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
+      joins("JOIN orders ON users.id = orders.user_id JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
       where("orders.checked_out" => true).
       group("orders.id").
       order("value DESC").
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   def self.highest_lifetime
     select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").
-      joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
+      joins("JOIN orders ON users.id = orders.user_id JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
       where("orders.checked_out" => true).
       group("users.id").
       order("value DESC").
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 
   def self.highest_average_order
 
-    joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
+    joins("JOIN orders ON users.id = orders.user_id JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
       where("orders.checked_out" => true).
       select("users.id AS user_id, users.first_name AS user_first_name, users.last_name AS user_last_name, (SUM(purchases.quantity * products.price) / COUNT(DISTINCT orders.id)) AS value").
       group("users.id").
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
 
   def self.most_orders
     select("users.first_name AS user_first_name, users.last_name AS user_last_name, COUNT(DISTINCT orders.id) AS orders_placed").
-      joins("JOIN orders ON users.id = orders.userid").
+      joins("JOIN orders ON users.id = orders.user_id").
       where("orders.checked_out" => true).
       group("users.id").
       order("orders_placed DESC").
