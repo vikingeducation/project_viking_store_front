@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   belongs_to :user
 
-  has_many :purchases
+  has_many :purchases, :dependent => :destroy
   has_many :products, through: :purchases
   has_many :categories, through: :products
 

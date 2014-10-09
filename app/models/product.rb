@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
   belongs_to :category
 
-  has_many :purchases
+  has_many :purchases, :dependent => :destroy
   has_many :orders, through: :purchases
   has_many :users, through: :orders
 

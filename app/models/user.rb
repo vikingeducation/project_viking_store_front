@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   belongs_to :billing, :class_name => "Address"
   belongs_to :shipping, :class_name => "Address"
 
-  has_many :addresses
-  has_many :orders
+  has_many :addresses, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
   has_many :products, through: :orders
 
   def self.new_users(last_x_days = nil)
