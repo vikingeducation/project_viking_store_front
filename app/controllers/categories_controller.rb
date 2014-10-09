@@ -4,9 +4,18 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    @category = Category.new
   end
 
   def create
+    @category = Category.new(whitelisted_category_params)
+    if @category.save
+      flash[:success] = "Category created successfully."
+      redirect_to category_path(@category.id)
+    else
+      flash[:error] = ""
+      render new_category_path
+    end
   end
 
   def show
@@ -14,11 +23,18 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    @category = Category.find(params[:id])
   end
 
   def update
   end
 
   def destroy
+  end
+
+  private
+
+  def whitelisted_category_params
+    params.require(:category).permit(:name)
   end
 end
