@@ -27,6 +27,14 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    @category = Category.find(params[:id])
+    if @category.update_attributes(whitelisted_category_params)
+      flash[:success] = "Category updated successfully."
+      redirect_to category_path(@category.id)
+    else
+      flash.now[:error] = "Failed to update Category."
+      render new_category_path
+    end
   end
 
   def destroy

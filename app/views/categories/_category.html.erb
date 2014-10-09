@@ -1,6 +1,6 @@
 <tr>
   <td><%= category.id %></td>
   <td><%= link_to category.name, category_path(category.id) %></td>
-  <td></td>
+  <td><%= link_to "edit", edit_category_path(category.id) %></td>
   <td></td>
 </tr>
