@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  belongs_to :user
+  has_many :products, through: :purchases
 
   def self.new_orders(last_x_days = nil)
     if last_x_days

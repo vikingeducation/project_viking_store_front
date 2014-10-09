@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :addresses
+  has_many :orders
+  has_many :products, through: :orders
 
   def self.new_users(last_x_days = nil)
     if last_x_days

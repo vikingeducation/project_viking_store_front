@@ -1,4 +1,6 @@
 class Purchase < ActiveRecord::Base
+  belongs_to :order
+  belongs_to :product
 
   def self.revenue(last_x_days = nil)
 
