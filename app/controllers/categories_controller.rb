@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
       flash[:success] = "Category created successfully."
       redirect_to category_path(@category.id)
     else
-      flash[:error] = ""
+      flash.now[:error] = "Failed to create Category."
       render new_category_path
     end
   end
