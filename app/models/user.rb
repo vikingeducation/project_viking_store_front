@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  belongs_to :billing, :class_name => "Address"
+  belongs_to :shipping, :class_name => "Address"
+
   has_many :addresses
   has_many :orders
   has_many :products, through: :orders
