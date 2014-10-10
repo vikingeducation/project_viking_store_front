@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
   has_many :orders, :dependent => :destroy
   has_many :products, through: :orders
 
+  validates :first_name, :last_name, :email, :presence => true
+  validates :email,
+            :uniqueness => true
+
   def self.new_users(last_x_days = nil)
     if last_x_days
       where("created_at > ?", Time.now - last_x_days.days).size

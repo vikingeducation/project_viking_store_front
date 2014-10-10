@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
   has_many :products, through: :purchases
   has_many :categories, through: :products
 
+  validates :user_id, :presence => true
+
   def self.new_orders(last_x_days = nil)
     if last_x_days
       where("checkout_date > ?", Time.now - last_x_days.days).size

@@ -2,6 +2,8 @@ class Purchase < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 
+  validates :order_id, :product_id, :quantity, :presence => true
+
   def self.revenue(last_x_days = nil)
 
     if last_x_days
