@@ -5,3 +5,9 @@
 .panel {
   border: 1px solid black;
 }
+
+.field_with_errors {
+  * {
+    border-color: red;
+  }
+}
