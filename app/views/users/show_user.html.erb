@@ -1,0 +1,14 @@
+<h3>User <%= @user.id %>: <%= "#{@user.first_name} #{@user.last_name}" %></h3>
+<h4>User Information</h4>
+<p>First Name: <%= @user.first_name %></p>
+<p>Last Name: <%= @user.last_name %></p>
+<p>Email: <%= @user.email %></p>
+<p>Telephone: <%= @user.phone_number %></p>
+<p>Default Billing Address: <%= address_maker(@user.billing) %></p>
+<p>Default Billing Address: <%= address_maker(@user.shipping) %></p>
+
+
+<%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", edit_user_path(@user.id) %><br>
+<%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user), :method => :delete, :data => { confirm: "Are you sure?" } %><br>
+<%= link_to "View Saved Addresses", "#" %><br>
+<%= link_to "Unplaced Order", "#" %>

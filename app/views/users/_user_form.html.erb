@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= render "partials/errors", :object => user %>
+
+    <%= form_for user do |f| %>
+      <h3><%= form_type %> user</h3>
+      <div class="form-group">
+        <%= f.label "User ID:" %>
+        <%= user.id ? user.id : "N/A" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, placeholder: "enter the first name here", :class => "form-control form-group" %>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, placeholder: "enter the first name here", :class => "form-control form-group" %>  
+        <%= f.label :email %>
+        <%= f.email_field :email, placeholder: "enter email here", :class => "form-control form-group" %>
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, placeholder: "enter the first name here", :class => "form-control form-group" %>
+        <%= f.label :billing %>
+        <%= f.collection_select :billing_id, Address.where(user_id: user.id), :id, :street_address, :class => "form-control form-group" %><br>
+        <%= f.label :shipping %>
+        <%= f.collection_select :shipping_id, Address.where(user_id: user.id), :id, :street_address, :class => "form-control form-group" %><br>
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, placeholder: "enter the first name here", :class => "form-control form-group" %>
+      </div>
+      <%=link_to( "View Saved Adreess", "#")%><br><br>
+      <%= f.submit (form_type == "Edit" ? "Update" : form_type) + " user", :class => "btn btn-large btn-primary btn-block" %>
+    <% end %><br><br>
+
+    <%= (link_to "Delete user", user_path(@user), :method => :delete, :data => { confirm: "Are you sure?" }) if user.id %>
+  </div>
+</div>

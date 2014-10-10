@@ -106,7 +106,8 @@ end
     email:       Faker::Internet.email(sample_name.join(" ")),
     billing_id:  random_user_address(x+1),
     shipping_id: random_user_address(x+1),
-    created_at:  creation_date
+    created_at:  creation_date,
+    phone_number:   Faker::PhoneNumber.phone_number
   } ).save
 end
 
