@@ -78,8 +78,8 @@ def generate_addresses(user_id)
     Address.new( {
       user_id:        user_id,
       street_address: Faker::Address.street_address,
-      city_id:           city_instance["city"],
-      state_id:          city_instance["state"],
+      city_id:        city_instance["city"],
+      state_id:       city_instance["state"],
       zip_code:       city_instance["zip"],
       phone_number:   Faker::PhoneNumber.phone_number
     } ).save
