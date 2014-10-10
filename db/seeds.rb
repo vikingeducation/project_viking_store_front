@@ -1,7 +1,8 @@
 # Make sure your seeds file blows away any existing models every time it starts running: JUST RUN THIS WITH RAKE db:reset
 
 #SCALAR == 5 => 155 Cities, 125 Users, <125 Orders, ~360 order items
-
+puts "********Begin Seeding Data************"
+t = Time.now
 SCALAR = 5 # Seed multiplier
 
 #generate products
@@ -166,3 +167,7 @@ end
     generate_contents(o[:id])
   end
 end
+
+q = Time.now
+puts "********Seeding Data End************"
+puts"********Seeding took #{q-t} seconds, I think************"

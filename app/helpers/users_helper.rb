@@ -6,4 +6,5 @@ module UsersHelper
   def address_maker(addr)
 		"#{addr.street_address}, #{addr.city.name}, #{addr.state.name}, #{addr.zip_code}"
   end
+
 end
