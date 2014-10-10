@@ -7,7 +7,7 @@ SCALAR = 5 # Seed multiplier
 #generate products
 SCALAR.times do
   Category.new( {
-    name:        Faker::Commerce.department,
+    name:        Faker::Commerce.department(1),
     description: Faker::Lorem.sentence
   } ).save
 end
