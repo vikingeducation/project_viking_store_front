@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010211634) do
+ActiveRecord::Schema.define(version: 20141010225211) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address",    null: false
@@ -40,13 +40,14 @@ ActiveRecord::Schema.define(version: 20141010211634) do
 
   create_table "credit_cards", force: true do |t|
     t.string   "nickname",    default: "My Credit Card"
-    t.integer  "card_number",                            null: false
+    t.string   "card_number",                            null: false
     t.integer  "exp_month",                              null: false
     t.integer  "exp_year",                               null: false
     t.string   "brand",       default: "VISA",           null: false
     t.integer  "user_id",                                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ccv"
   end
 
   create_table "orders", force: true do |t|

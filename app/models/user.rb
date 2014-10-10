@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :addresses, :dependent => :destroy
   has_many :orders, :dependent => :destroy
   has_many :products, through: :orders
+  has_many :credit_cards
 
   validates :first_name, :last_name, :email, :presence => true
   validates :email,

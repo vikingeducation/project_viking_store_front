@@ -86,6 +86,17 @@ def generate_addresses(user_id)
   end
 end
 
+#generate credit cards
+def generate_card(user_id)
+  CreditCard.new({
+    user_id:      user_id,
+    card_number:  Faker::Business.credit_card_number,
+    exp_month:    rand(12)+1,
+    exp_year:     2014+rand(10),
+    ccv:          Faker::Number.number(3)
+  }).save
+end
+
 #generate users, SCALAR*25 users
 def creation_date
   time_frames = []
@@ -99,6 +110,7 @@ end
 (SCALAR*25).times do |x|
   sample_name = [Faker::Name.first_name, Faker::Name.last_name]
   generate_addresses(x+1)
+  generate_card(x+1)
 
   User.new( {
     first_name:  sample_name[0],
