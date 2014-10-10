@@ -15,7 +15,7 @@
   <tr>
     <td>Carts In</td>
     <!-- evil view logic -->
-    <td><%= @product.orders.where(checked_out: false).count %></td>
+    <td><%= checked_out(false) %></td>
   </tr>
 </table>
 

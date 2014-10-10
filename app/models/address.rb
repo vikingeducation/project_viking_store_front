@@ -8,7 +8,7 @@ class Address < ActiveRecord::Base
 
   validates :street_address,
             :zip_code,
-            :city,
-            :state,
+            :city_id,
+            :state_id,
             :user_id, :presence => true
 end
