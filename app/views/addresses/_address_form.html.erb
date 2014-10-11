@@ -27,6 +27,6 @@
       <%= f.submit (form_type == "Edit" ? "Update" : form_type) + " Product", :class => "btn btn-large btn-primary btn-block" %>
     <% end %>
 
-    <%= (link_to "Delete Product", address_path(@address), :method => :delete, :data => { confirm: "Are you sure?" }) if address.id %>
+    <%= (link_to "Delete Product", user_address_path(@address), :method => :delete, :data => { confirm: "Are you sure?" }) if address.id %>
   </div>
 </div>

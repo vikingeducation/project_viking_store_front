@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
+
   def index
     @users = User.all
   end
 
   def new
     @user = User.new
-    render 'new_user'
   end
 
   def create
@@ -15,18 +15,15 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash.now[:error] = "Failed to create User."
-      render 'new_user'
     end
   end
 
   def show
     @user = User.find(params[:id])
-    render 'show_user'
   end
 
   def edit
     @user = User.find(params[:id])
-    render 'edit_user'
   end
 
   def update
@@ -36,7 +33,6 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash.now[:error] = "Failed to update User."
-      render 'edit_user'
     end
   end
 

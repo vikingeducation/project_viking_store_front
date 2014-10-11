@@ -5,5 +5,10 @@
 <p>City: <%= @address.city.name %></p>
 <p>State: <%= @address.state.name %></p>
 
-<%= link_to "Edit Address", edit_address_path(@address.id) %><br>
-<%= link_to "Delete Address", address_path(@address), :method => :delete, :data => { confirm: "Are you sure?" } %>
+<%= link_to "Edit Address", 
+		edit_user_address_path(@address.user_id, @address.id) %><br>
+		
+<%= link_to "Delete Address", 
+		user_address_path(@address.user_id, @address.id), 
+		:method => :delete, 
+		:data => { confirm: "Are you sure?" } %>

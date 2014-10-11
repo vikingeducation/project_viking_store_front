@@ -2,27 +2,25 @@ class AddressesController < ApplicationController
 
   def index
     @addresses = Address.all
-    render 'addresses_index'
   end
 
   def new
-    @address = Address.new
+    @address = Address.new(params[:user_id])
   end
 
   def create
     @address = Address.new(whitelisted_address_params)
     if @address.save
       flash[:success] = "Address created successfully."
-      redirect_to addresses_path
+      redirect_to user_addresses_path
     else
       flash.now[:error] = "Failed to create Address."
-      render new_addresses_path
+      render new_user_addresses_path
     end
   end
 
   def show
     @address = Address.find(params[:id])
-    render 'show_address'
   end
 
   def edit
@@ -33,10 +31,10 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if @address.update_attributes(whitelisted_address_params)
       flash[:success] = "Address updated successfully."
-      redirect_to addresses_path
+      redirect_to user_addresses_path
     else
       flash.now[:error] = "Failed to update Address."
-      render edit_address_path
+      render edit_user_address_path
     end
   end
 
@@ -45,7 +43,7 @@ class AddressesController < ApplicationController
     session[:return_to] ||= request.referer
     if @address.destroy
       flash[:success] = "Address deleted successfully."
-      redirect_to addresses_path
+      redirect_to user_addresses_path
     else
       flash[:error] = "Failed to delete Address."
       redirect_to session.delete(:return_to)
