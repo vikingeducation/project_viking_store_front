@@ -7,9 +7,11 @@ class User < ActiveRecord::Base
   has_many :products, through: :orders
   has_many :credit_cards
 
-  validates :first_name, :last_name, :email, :presence => true
+  validates :first_name, :last_name, :email, presence: true,
+                                             length: { maximum: 64 }
   validates :email,
-            :uniqueness => true
+            :uniqueness => true,
+            :format => { :with => /@/ }
 
   def self.new_users(last_x_days = nil)
     if last_x_days

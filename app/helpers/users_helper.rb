@@ -7,4 +7,7 @@ module UsersHelper
 		"#{addr.street_address}, #{addr.city.name}, #{addr.state.name}, #{addr.zip_code}"
   end
 
+  def order_value(order)
+    number_to_currency((order.purchases.map { |purchase| purchase.quantity * purchase.product.price }).inject(:+))
+  end
 end

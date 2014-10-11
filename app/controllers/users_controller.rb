@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash.now[:error] = "Failed to create User."
-      render new_user_path
+      render 'new_user'
     end
   end
 
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash.now[:error] = "Failed to update User."
-      render edit_user_path
+      render 'edit_user'
     end
   end
 
@@ -55,6 +55,6 @@ class UsersController < ApplicationController
   private
 
   def whitelisted_user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id, :phone_number)
   end
 end

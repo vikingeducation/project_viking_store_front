@@ -1,9 +1,13 @@
 <div class="panel">
-<h4>Credit Card Information</h4>
+  <h4>Credit Card Information</h4>
 
-<p>First Name: <%= @user.first_name %></p>
-<p>Last Name: <%= @user.last_name %></p>
-<p>Number: <%= @user.credit_cards[0].card_number %></p>
-<p>Expiration: <%="#{@user.credit_cards[0].exp_month}-#{@user.credit_cards[0].exp_year}"%></p>
-<p>CCV: <%= @user.credit_cards[0].ccv %></p>
+  <% if @user.credit_cards.empty? %>
+    No Credit Card on file
+  <% else %>
+    <p>First Name: <%= @user.first_name %></p>
+    <p>Last Name: <%= @user.last_name %></p>
+    <p>Number: <%= @user.credit_cards[0].card_number %></p>
+    <p>Expiration: <%="#{@user.credit_cards[0].exp_month}-#{@user.credit_cards[0].exp_year}"%></p>
+    <p>CCV: <%= @user.credit_cards[0].ccv %></p>
+  <% end %>
 </div>
