@@ -5,7 +5,7 @@ class AddressesController < ApplicationController
   end
 
   def new
-    @address = Address.new(params[:user_id])
+    @address = Address.new(user_id: params[:user_id])
   end
 
   def create
@@ -15,7 +15,7 @@ class AddressesController < ApplicationController
       redirect_to user_addresses_path
     else
       flash.now[:error] = "Failed to create Address."
-      render new_user_addresses_path
+      render 'new'
     end
   end
 
@@ -53,7 +53,7 @@ class AddressesController < ApplicationController
   private
 
   def whitelisted_address_params
-    params.require(:address).permit(:street_address, :state, :city)
+    params.require(:address).permit(:street_address, :state_id, :city_id, :user_id, :zip_code)
   end
 
 end

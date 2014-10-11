@@ -4,7 +4,5 @@
 <%=link_to('#') do %>
   <div class="btn btn-block btn-default btn-lg btn-primary">Create Order</div>
 <%end%><br>
-<%=link_to('#') do %>
-  <div class="btn btn-block btn-default btn-lg btn-primary">Create Address</div>
-<%end%>
+<%= link_to "Create Address", new_user_address_path(@user), :class => "btn btn-block btn-default btn-lg btn-primary" %>
 </div>
