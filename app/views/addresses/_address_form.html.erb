@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= render "partials/errors", :object => address %>
+
+    <%= form_for address do |f| %>
+      <h3><%= form_type %> address</h3>
+      <div class="form-group">
+        <%= f.label "User ID:" %>
+        <%= address.user.id %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :street_address %>
+        <%= f.text_field :street_address, placeholder: "enter street address here", :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :state %>
+        <%= f.collection_select :state, State.all, :id, :name, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :city %>
+        <%= f.text_field :city, placeholder: "enter street address here", :class => "form-control" %>
+      </div>
+
+      <%= f.submit (form_type == "Edit" ? "Update" : form_type) + " Product", :class => "btn btn-large btn-primary btn-block" %>
+    <% end %>
+
+    <%= (link_to "Delete Product", address_path(@address), :method => :delete, :data => { confirm: "Are you sure?" }) if address.id %>
+  </div>
+</div>

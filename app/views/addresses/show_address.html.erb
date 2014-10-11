@@ -1,5 +1,4 @@
-<h3>Address <%= @address.id %></h3>
-<h4>Address Information</h4>
+<h3><%= "#{@address.user.first_name} #{@address.user.last_name}'s" %> Address</h3>
 <p>Owner ID: <%= @address.user.id %></p>
 <p>Owner Name: <%= link_to "#{@address.user.first_name} #{@address.user.last_name}", user_path(@address.user) %></p>
 <p>Street: <%= @address.street_address %></p>

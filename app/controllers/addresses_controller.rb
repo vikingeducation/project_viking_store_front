@@ -55,7 +55,7 @@ class AddressesController < ApplicationController
   private
 
   def whitelisted_address_params
-    params.require(:address).permit(:name, :sku, :price, :category_id)
+    params.require(:address).permit(:street_address, :state, :city)
   end
 
 end
