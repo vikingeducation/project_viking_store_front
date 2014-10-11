@@ -52,11 +52,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy_credit_card # TRY TRY AGAIN
-    User.find_by(params[:id]).credit_card.destroy
-    render 'show_user'
-  end
-
   private
 
   def whitelisted_user_params
