@@ -10,4 +10,5 @@
     <p>Expiration: <%="#{@user.credit_cards[0].exp_month}-#{@user.credit_cards[0].exp_year}"%></p>
     <p>CCV: <%= @user.credit_cards[0].ccv %></p>
   <% end %>
+  <%= link_to "delete", '13/cc', :method => :delete, :data => { confirm: "Are you sure?" } %>
 </div>
