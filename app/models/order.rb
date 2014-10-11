@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :user
+  belongs_to :billing, :class_name => "Address"
 
   has_many :purchases, :dependent => :destroy
   has_many :products, through: :purchases
