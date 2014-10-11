@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  
+
   def index
     @addresses = Address.all
     render 'addresses_index'
@@ -22,6 +22,7 @@ class AddressesController < ApplicationController
 
   def show
     @address = Address.find(params[:id])
+    render 'show_address'
   end
 
   def edit
