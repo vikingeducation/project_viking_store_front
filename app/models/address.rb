@@ -9,6 +9,7 @@ class Address < ActiveRecord::Base
   has_one :default_shipping, foreign_key: :shipping_id, :class_name => "User"
 
   validates_presence_of :user
+  validates_presence_of :state
   validates :street_address,
             :zip_code,
             :city_id,

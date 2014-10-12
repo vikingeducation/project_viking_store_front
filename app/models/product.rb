@@ -8,6 +8,7 @@ class Product < ActiveRecord::Base
   validates :name, :sku, :price, :presence => true
   validates :sku, :uniqueness => true
   validates :price, numericality: { less_than_or_equal_to: 10000 }
+  validates_presence_of :category
 
   def self.new_products(last_x_days = nil)
     if last_x_days

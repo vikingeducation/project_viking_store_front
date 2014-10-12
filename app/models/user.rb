@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
-  belongs_to :billing, :class_name => "Address"
-  belongs_to :shipping, :class_name => "Address"
+  belongs_to :billing, :class_name => "Address" # should be cleared if that address is deleted
+  belongs_to :shipping, :class_name => "Address" # should be cleared if that address is deleted
 
   has_many :addresses, :dependent => :destroy
-  has_many :orders, :dependent => :destroy
+  has_many :orders, :dependent => :destroy # should only delete carts
   has_many :products, through: :orders
-  has_one :credit_card
+  has_one :credit_card, :dependent => :destroy
 
   validates :first_name, :last_name, :email, presence: true,
                                              length: { maximum: 64 }
