@@ -1,15 +1,9 @@
 <h2><%= "Order #{@order.id}" %></h2>
 
 <div class="panel">
-	<h3>Logistical Information </h3>
-	<h4>Basic Information</h4>
-	<p>Owner ID: <%= @order.user.id %></p>
-	<p>Owner Name: <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", user_path(@order.user) %></p>
-	<p>Phone Number: <%= @order.user.phone_number %></p>
-	<p>Date Place: <%= @order.created_at %></p>
+	<%= render "logistical" %>
 	<p>Number Producs: <%= @order.purchases.sum(:quantity) %></p>
 	<p>Order Value: <%= "??? MONEY!" %></p>
-
 	<%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
 	<h4>Order Status</h4>
 	<h3 id='placed'>
@@ -29,12 +23,12 @@
 	<h4>Billing Card</h4>
 	<p>Last four digits: <%= @order.user.credit_card.card_number[-4..-1] %></p>
 	<%= link_to "Edit order",
-			edit_user_order_path(@order.user_id, @order.id) %><br>
+	    edit_user_order_path(@order.user_id, @order.id) %><br>
 
 	<%= link_to "Delete order",
-			user_order_path(@order.user_id, @order.id),
-			:method => :delete,
-			:data => { confirm: "Are you sure?" } %>
+	    user_order_path(@order.user_id, @order.id),
+	    :method => :delete,
+	    :data => { confirm: "Are you sure?" } %>
 </div>
 
 <div class="panel">

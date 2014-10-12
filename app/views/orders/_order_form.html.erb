@@ -2,44 +2,26 @@
   <div class="col-md-6">
     <%= render "partials/errors", :object => order %>
 
+    <%= render "logistical" %>
+    <%= link_to "Edit Customer Profile", edit_user_path(order.user) %>
+
     <%= form_for order, :url => { :action => (order.id ? :update : :create) } do |f| %>
 
       <h3><%= form_type %> order</h3>
-      <div class="form-group">
-        <%= f.label "User ID:" %>
-        <%= order.user_id %>
-        <%= f.hidden_field :user_id %>
-      </div>
+      <%= f.hidden_field :user_id %>
 
-      <div class="form-group">
-        <%= f.label :user %>
-        <%= link_to "#{order.user.first_name} #{order.user.last_name} (Click to view user)", user_path(order.user_id) %>
-      </div>
+      <%= f.label :billing %>
+      <%= f.collection_select :billing_id, Address.where(user_id: order.user.id), :id, :street_address, :class => "form-control form-group" %><br>
+      <%= f.label :shipping %>
+      <%= f.collection_select :shipping_id, Address.where(user_id: order.user.id), :id, :street_address, :class => "form-control form-group" %><br>
 
-      <div class="form-group">
-        <%= f.label :street_order %>
-        <%= f.text_field :street_order, placeholder: "enter street order here", :class => "form-control" %>
-      </div>
+      <!-- < f.label :billing_card %>
+      < f.collection_select :billing_card, order.user.credit_card.card_number, :id, order.user.credit_card.card_number[-4..-1] %></br> -->
 
-      <div class="form-group">
-        <%= f.label :state %>
-        <%= f.collection_select :state_id, State.all, :id, :name, :class => "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :city %>
-        <%= f.collection_select :city_id, City.all, :id, :name, :class => "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :zip_code %>
-        <%= f.text_field :zip_code, placeholder: "enter zip code here", :class => "form-control" %>
-      </div>
-
-      <%= f.submit (form_type == "Edit" ? "Update" : form_type) + " Address", :class => "btn btn-large btn-primary btn-block" %>
+      <%= f.submit (form_type == "Edit" ? "Update" : form_type) + " Order", :class => "btn btn-large btn-primary btn-block" %>
     <% end %>
 
-    <%= (link_to "Delete Address",
+    <%= (link_to "Delete Order",
     user_order_path(order.user_id, order.id),
     :method => :delete,
     :data => { confirm: "Are you sure?" }) if order.id %>
