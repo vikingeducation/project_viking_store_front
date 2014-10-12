@@ -13,13 +13,13 @@ SCALAR.times do
   } ).save
 end
 
-(SCALAR*10).times do |x|
+(SCALAR*10).times do
   Product.new( {
     name:        Faker::Commerce.product_name,
     category_id: rand(Category.count)+1,
     description: Faker::Lorem.sentence,
-    sku:         x,
-    price:       9.80
+    sku:         (Faker::Code.ean).to_i,
+    price:       Faker::Commerce.price
   } ).save
 end
 
