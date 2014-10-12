@@ -1,7 +1,7 @@
 <div class="panel">
 	<h4>Admin Actions for <%= "#{@user.first_name} #{@user.last_name}" %></h4>
 
-<%=link_to('#') do %>
+<%=link_to(new_order_path(@user)) do %>
   <div class="btn btn-block btn-default btn-lg btn-primary">Create Order</div>
 <%end%><br>
 <%= link_to "Create Address", new_user_address_path(@user), :class => "btn btn-block btn-default btn-lg btn-primary" %>
