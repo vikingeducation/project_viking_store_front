@@ -19,7 +19,7 @@ end
     category_id: rand(Category.count)+1,
     description: Faker::Lorem.sentence,
     sku:         x,
-    price:       Faker::Commerce.price
+    price:       9.80
   } ).save
 end
 
