@@ -39,12 +39,13 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
+    @order.checkout_date ||= Time.now if params[:order][:checked_out] == "1"
     if @order.update_attributes(whitelisted_order_params)
       flash[:success] = "Order updated successfully."
       redirect_to user_orders_path
     else
       flash.now[:error] = "Failed to update Order."
-      render edit_user_order_path
+      render 'edit'
     end
   end
 
@@ -63,7 +64,7 @@ class OrdersController < ApplicationController
   private
 
   def whitelisted_order_params
-    params.require(:order).permit(:user_id, :billing_id, :shipping_id, :checked_out, :checkout_date)
+    params.require(:order).permit(:user_id, :billing_id, :shipping_id, :checked_out, :checkout_date, :credit_card_id)
   end
 
 end

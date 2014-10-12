@@ -2,11 +2,15 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :billing, :class_name => "Address"
   belongs_to :shipping, :class_name => "Address"
+  belongs_to :credit_card
+
   has_many :purchases, :dependent => :destroy
   has_many :products, through: :purchases
   has_many :categories, through: :products
 
-  validates :user_id, :presence => true
+  validates :user_id,
+            :presence => true
+  validates_inclusion_of :checked_out, :in => [true, false]
 
   def self.new_orders(last_x_days = nil)
     if last_x_days
