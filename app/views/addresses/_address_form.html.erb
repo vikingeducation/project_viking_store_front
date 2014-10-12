@@ -12,6 +12,11 @@
       </div>
 
       <div class="form-group">
+        <%= f.label :user %>
+        <%= link_to "#{address.user.first_name} #{address.user.last_name} (Click to view user)", user_path(address.user_id) %>
+      </div>
+
+      <div class="form-group">
         <%= f.label :street_address %>
         <%= f.text_field :street_address, placeholder: "enter street address here", :class => "form-control" %>
       </div>

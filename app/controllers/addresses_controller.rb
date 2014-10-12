@@ -4,7 +4,13 @@ class AddressesController < ApplicationController
     if params[:user_id].nil?
       @addresses = Address.all
     else
-      @addresses = Address.where(user_id: params[:user_id])
+      if User.where(id: params[:user_id]).first.present?
+        @user = User.find(params[:user_id])
+        @addresses = Address.where(user_id: @user.id)
+      else
+        flash[:error] = "Invalid User Id"
+        redirect_to addresses_path
+      end
     end 
   end
 
@@ -16,7 +22,7 @@ class AddressesController < ApplicationController
     @address = Address.new(whitelisted_address_params)
     if @address.save
       flash[:success] = "Address created successfully."
-      redirect_to user_addresses_path
+      redirect_to user_addresses_path(@address.user_id)
     else
       flash.now[:error] = "Failed to create Address."
       render 'new'
