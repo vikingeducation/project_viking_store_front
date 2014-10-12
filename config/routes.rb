@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   resources :categories
   resources :products
   resources :addresses, only: [:index]
-  resources :users do 
+  resources :orders, only: [:index]
+  resources :users do
     resources :addresses
+    resources :orders
   end
   resources :credit_cards, only: [:destroy]
   #delete 'users/:id/cc' => 'users#destroy_credit_card'
