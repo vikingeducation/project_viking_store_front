@@ -16,7 +16,7 @@
           <%= f.radio_button :checked_out, "0" %><%= f.label "UNPLACED" %>
           </div>
         <% else %>
-
+          <%= f.hidden_field :checked_out, value: "0" %>
         <% end %>
  
         <%= f.hidden_field :user_id %>
