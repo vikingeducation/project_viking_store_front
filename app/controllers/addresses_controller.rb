@@ -11,7 +11,7 @@ class AddressesController < ApplicationController
         flash[:error] = "Invalid User Id"
         redirect_to addresses_path
       end
-    end 
+    end
   end
 
   def new
