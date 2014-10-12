@@ -1,7 +1,11 @@
 class AddressesController < ApplicationController
 
   def index
-    @addresses = Address.all
+    if params[:user_id].nil?
+      @addresses = Address.all
+    else
+      @addresses = Address.where(user_id: params[:user_id])
+    end 
   end
 
   def new
