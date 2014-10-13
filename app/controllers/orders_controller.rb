@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
     @order = Order.new(whitelisted_order_params)
     if @order.save
       flash[:success] = "Order created successfully."
-      redirect_to user_orders_path(@order.user_id)
+      redirect_to edit_user_order_path(@order.user.id, @order.id)
     else
       flash.now[:error] = "Failed to create Order."
       render 'new'

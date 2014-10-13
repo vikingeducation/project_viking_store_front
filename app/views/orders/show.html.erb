@@ -2,8 +2,8 @@
 
 <div class="panel">
 	<%= render "logistical" %>
-	<p>Number Producs: <%= @order.purchases.sum(:quantity) %></p>
-	<p>Order Value: <%= "??? MONEY!" %></p>
+	<p>Number Products: <%= @order.purchases.sum(:quantity) %></p>
+	<p>Order Value: <%= number_to_currency(@order.products.sum("quantity * price")) %></p>
 	<%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
 	<h4>Order Status</h4>
 	<h3 id=<%= @order.checked_out ? 'placed' : 'unplaced' %>>
