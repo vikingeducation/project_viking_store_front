@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :addresses
     resources :orders
   end
+
   resources :credit_cards, only: [:destroy]
   #delete 'users/:id/cc' => 'users#destroy_credit_card'
 

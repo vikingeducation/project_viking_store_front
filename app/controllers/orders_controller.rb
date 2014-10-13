@@ -35,6 +35,7 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @purchases = Purchase.where(order_id: @order.id)
   end
 
   def update
