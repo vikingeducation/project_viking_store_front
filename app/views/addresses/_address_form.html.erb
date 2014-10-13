@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <%= render "partials/errors", :object => address %>
+    <%= render "shared/errors", :object => address %>
 
     <%= form_for address, :url => { :action => (address.id ? :update : :create) } do |f| %>
 
