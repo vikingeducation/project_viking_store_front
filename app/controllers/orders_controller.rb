@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @user = @order.user
-    @purchases = Purchase.where(order_id: @order.id)
+    @purchases = @order.purchases
   end
 
   def update
