@@ -1,4 +1,4 @@
-<h2><%= "Order #{@order.id}" %></h2>
+<h2><%= @order.checked_out ? "Order #{@order.id}" : "#{@order.user.first_name} #{@order.user.last_name}'s Cart" %></h2>
 
 <div class="panel">
 	<%= render "logistical" %>
@@ -6,19 +6,23 @@
 	<p>Order Value: <%= "??? MONEY!" %></p>
 	<%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
 	<h4>Order Status</h4>
-	<h3 id='placed'>
+	<h3 id=<%= @order.checked_out ? 'placed' : 'unplaced' %>>
 	<%= @order.checked_out ? "PLACED" : "UNPLACED" %>
 	</h3>
 
+<% if @order.shipping %>
 	<h4>Shipping Address</h4>
 	<p>Street: <%= @order.shipping.street_address %></p>
 	<p>City: <%= @order.shipping.city.name %></p>
 	<p>State: <%= @order.shipping.state.name %></p>
+<% end %>
 
+<% if @order.billing %>
 	<h4>Billing Address</h4>
 	<p>Street: <%= @order.billing.street_address %></p>
 	<p>City: <%= @order.billing.city.name %></p>
 	<p>State: <%= @order.billing.state.name %></p>
+<% end %>
 
 	<h4>Billing Card</h4>
 	<p>Last four digits: <%= @order.user.credit_card.card_number[-4..-1] %></p>
