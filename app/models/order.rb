@@ -12,7 +12,7 @@ class Order < ActiveRecord::Base
             :presence => true
   validates_inclusion_of :checked_out, :in => [true, false]
 
-  def order_value
+  def value
     products.sum("quantity * price")
   end
 
