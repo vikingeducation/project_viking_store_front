@@ -9,6 +9,6 @@
   <td><%= order_status(order) %></td>
   <td><%= order.checkout_date %></td>
   <td><%= link_to "show", user_order_path(order.user_id, order.id) %></td>
-  <td><%= link_to "edit", edit_user_order_path(order.user_id, order.id) %></td>
+  <td><%= order.user ? (link_to "edit", edit_user_order_path(order.user_id, order.id)) : "edit" %></td>
   <td><%= link_to "delete", user_order_path(order.user_id, order.id), :method => :delete, :data => { confirm: "Are you sure?" } %></td>
 </tr>
