@@ -15,6 +15,12 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :purchases, :reject_if => :all_blank,
                                             :allow_destroy => true
 
+  before_save :cart_check
+
+  def cart_check
+    !user.cart.present? || self[:id] == user.cart.first.id
+  end
+
   def value
     products.sum("quantity * price")
   end

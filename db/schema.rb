@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012211037) do
+ActiveRecord::Schema.define(version: 20141016050834) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address",    null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20141012211037) do
 
   create_table "orders", force: true do |t|
     t.boolean  "checked_out",    default: true, null: false
-    t.integer  "user_id",                       null: false
+    t.integer  "user_id"
     t.integer  "shipping_id"
     t.integer  "billing_id"
     t.datetime "created_at"

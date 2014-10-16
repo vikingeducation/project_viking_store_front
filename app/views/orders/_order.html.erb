@@ -1,6 +1,6 @@
 <tr>
   <td><%= order.id %></td>
-  <td><%= link_to order.user.id, user_orders_path(order.user) %></td>
+  <td><%= order.user ? (link_to order.user.id, user_orders_path(order.user)) : "N/A" %></td>
   <td><%= order.billing.nil? ? "N/A" : order.billing.street_address %></td>
   <td><%= order.billing.nil? ? "N/A" : order.billing.city.name %></td>
   <td><%= order.billing.nil? ? "N/A" : order.billing.state.name %></td>

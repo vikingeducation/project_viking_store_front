@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   belongs_to :shipping, :class_name => "Address" # should be cleared if that address is deleted
 
   has_many :addresses, :dependent => :destroy
-  has_many :orders, :dependent => :destroy # should only delete carts
+  has_many :orders # should only delete carts
   has_many :products, through: :orders
   has_one :credit_card, :dependent => :destroy
 
@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   validates :email,
             :uniqueness => true,
             :format => { :with => /@/ }
+
+  before_destroy :cart_cleanup
 
   def name
     "#{first_name} #{last_name}"
@@ -22,7 +24,11 @@ class User < ActiveRecord::Base
   end
 
   def cart
-    orders.where(checked_out: false).first
+    orders.where(checked_out: false)
+  end
+
+  def cart_cleanup
+    self.cart.each { |cart| cart.destroy }
   end
 
   def last_checkout_date
