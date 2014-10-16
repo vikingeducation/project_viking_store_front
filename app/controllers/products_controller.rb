@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    filter = params[:products_filter]
+    @products = filter.present? ? Product.where("category_id = ?", filter) : Product.all
   end
 
   def show

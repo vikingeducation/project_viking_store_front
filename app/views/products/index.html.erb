@@ -2,6 +2,12 @@
   <div class="col-md-12 ugly-banner">
     <h5><em>Choose from among our lineup of fine items below</em></h5>
   </div>
+  <div class="col-sm-6 col-md-3">
+    <form action="<%= products_path %>" method="GET">
+      <%= select_tag(:products_filter, options_for_select(Category.all.map { |category| [category.name, category.id]}) , {include_blank: true, :class => "form-control"}) %>
+      <input type="submit">
+    </form>
+  </div>
 </div>
 
 <div class="row">
