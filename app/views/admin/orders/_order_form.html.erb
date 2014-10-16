@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-8">
-    <%= render "shared/errors", :object => order %>
+    <%= render "admin/shared/errors", :object => order %>
     <div class="panel">
       <%= render "logistical" %>
-      <%= link_to "Edit Customer Profile", edit_user_path(order.user) %>
+      <%= link_to "Edit Customer Profile", edit_admin_user_path(order.user) %>
 
-      <%= form_for order, :url => { :action => (order.id ? :update : :create) } do |f| %>
+      <%= form_for [:admin, order], :url => { :action => (order.id ? :update : :create) } do |f| %>
 
         <% if form_type == "Edit" %>
           <h4>Order Placed </h4>
@@ -64,7 +64,7 @@
       <% end %>
 
       <%= (link_to "Delete Order",
-      user_order_path(order.user_id, order.id),
+      admin_user_order_path(order.user_id, order.id),
       :method => :delete,
       :data => { confirm: "Are you sure?" }) if order.id %>
     </div>

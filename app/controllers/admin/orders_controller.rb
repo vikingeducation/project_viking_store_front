@@ -8,7 +8,7 @@ class Admin::OrdersController < AdminController
         @orders = Order.where(user_id: @user.id)
       else
         flash[:error] = "Invalid User Id"
-        redirect_to user_orders_path
+        redirect_to admin_user_orders_path
       end
     end
   end
@@ -24,7 +24,7 @@ class Admin::OrdersController < AdminController
     @user = @order.user
     if @order.save
       flash[:success] = "Order created successfully."
-      redirect_to user_orders_path
+      redirect_to admin_user_orders_path
     else
       flash.now[:error] = "Failed to create Order."
       render 'new'
@@ -48,7 +48,7 @@ class Admin::OrdersController < AdminController
     @order.checkout_date ||= Time.now if params[:order][:checked_out]
     if @order.update_attributes(whitelisted_order_params)
       flash[:success] = "Order updated successfully."
-      redirect_to user_orders_path
+      redirect_to admin_user_orders_path
     else
       flash.now[:error] = "Failed to update Order."
       render 'edit'
@@ -60,7 +60,7 @@ class Admin::OrdersController < AdminController
     session[:return_to] ||= request.referer
     if @order.destroy
       flash[:success] = "Order deleted successfully."
-      redirect_to user_orders_path
+      redirect_to admin_user_orders_path
     else
       flash[:error] = "Failed to delete Order."
       redirect_to session.delete(:return_to)
