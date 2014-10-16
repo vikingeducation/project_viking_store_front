@@ -1,3 +1,29 @@
-.btn {
-	margin: 20px 0;
+@import 'colors';
+
+.navbar-offset {
+  padding-top: 50px;
+}
+
+nav.navbar-swedish {
+  background: linear-gradient($flag-dark-blue, $flag-blue);
+  a {
+    color: $flag-yellow;
+  }
+
+  li a:hover {
+    background-color: $flag-light-blue;
+  }
+}
+
+.main-footer {
+  background: linear-gradient($flag-blue, $flag-dark-blue);
+  color: $flag-yellow;
+  a {
+    color: $flag-yellow;
+    text-decoration: underline;
+    &:hover {
+      color: $flag-yellow;
+      background-color: $flag-light-blue;
+    }
+  }
 }

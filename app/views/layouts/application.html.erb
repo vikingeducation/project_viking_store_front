@@ -2,29 +2,28 @@
 <html>
 <head>
   <title>VikingStore</title>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="navbar-offset">
 
-<div class="container">
-  <h1>Viking Store Analytics Portal</h1>
-  <div class="row">
-    <%= render "admin/shared/admin_navbar" %>
+<%= render "shared/navbar" %>
 
-    <section class="col-md-10">
-      <%= render "admin/shared/flashes" %>
-      <%= yield %>
-    </section>
-  </div>
+<div class="container ">
+  <%= yield %>
 </div>
+
+<%= render "shared/footer" %>
 
 </body>
 </html>
