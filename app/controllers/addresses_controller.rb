@@ -3,7 +3,7 @@ class AddressesController < ApplicationController
     if params[:user_id].nil?
       @addresses = Address.all
     else
-      if User.where(id: params[:user_id]).first.present?
+      if User.exists?(params[:user_id])
         @user = User.find(params[:user_id])
         @addresses = Address.where(user_id: @user.id)
       else

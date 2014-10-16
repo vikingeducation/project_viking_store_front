@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
     if params[:user_id].nil?
       @orders = Order.all
     else
-      if User.where(id: params[:user_id]).first.present?
+      if User.exists?(params[:user_id])
         @user = User.find(params[:user_id])
         @orders = Order.where(user_id: @user.id)
       else
@@ -16,13 +16,15 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new(user_id: params[:user_id])
     @user = @order.user
+    3.times { @order.purchases.build({quantity: nil}) }
   end
 
   def create
     @order = Order.new(whitelisted_order_params)
+    @user = @order.user
     if @order.save
       flash[:success] = "Order created successfully."
-      redirect_to edit_user_order_path(@order.user.id, @order.id)
+      redirect_to user_orders_path
     else
       flash.now[:error] = "Failed to create Order."
       render 'new'
@@ -37,12 +39,13 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @user = @order.user
-    @purchases = @order.purchases
+    3.times { @order.purchases.build({quantity: nil}) }
   end
 
   def update
     @order = Order.find(params[:id])
-    @order.checkout_date ||= Time.now if params[:order][:checked_out] == "1"
+    @user = @order.user
+    @order.checkout_date ||= Time.now if params[:order][:checked_out]
     if @order.update_attributes(whitelisted_order_params)
       flash[:success] = "Order updated successfully."
       redirect_to user_orders_path
@@ -67,6 +70,6 @@ class OrdersController < ApplicationController
   private
 
   def whitelisted_order_params
-    params.require(:order).permit(:user_id, :billing_id, :shipping_id, :checked_out, :checkout_date, :credit_card_id)
+    params.require(:order).permit(:user_id, :billing_id, :shipping_id, :checked_out, :checkout_date, :credit_card_id, {:purchases_attributes => [:id, :quantity, :_destroy, :product_id]})
   end
 end

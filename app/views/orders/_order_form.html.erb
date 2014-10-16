@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-8">
     <%= render "shared/errors", :object => order %>
     <div class="panel">
       <%= render "logistical" %>
@@ -10,10 +10,10 @@
         <% if form_type == "Edit" %>
           <h4>Order Placed </h4>
           <div class="col-xs-6">
-          <%= f.radio_button :checked_out, "1" %><%= f.label "PLACED" %>
+          <%= f.radio_button :checked_out, true %><%= f.label "PLACED" %>
           </div class="col-xs-6">
           <div>
-          <%= f.radio_button :checked_out, "0" %><%= f.label "UNPLACED" %>
+          <%= f.radio_button :checked_out, false %><%= f.label "UNPLACED" %>
           </div>
         <% else %>
           <%= f.hidden_field :checked_out, value: "0" %>
@@ -30,6 +30,35 @@
         <%= f.collection_select :credit_card_id, CreditCard.where(user_id: order.user.id), :id, :card_number %>
 
         <br>
+
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total Price</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= f.fields_for :purchases do |purchase_fields| %>
+              <tr>
+                <td><%= purchase_fields.collection_select :product_id, Product.all, :id, :name, {:include_blank => 'None'} %></td>
+
+                <td><%= purchase_fields.text_field :quantity %></td>
+
+                <td><%= "N/A" %></td>
+
+                <td><%= "N/A" %></td>
+
+                <td><% if purchase_fields.object.persisted? %>
+                  <%= purchase_fields.check_box :_destroy %>
+                <% end %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
 
         <%= f.submit submit(form_type, "Order"), :class => "btn btn-large btn-primary btn-block" %>
       <% end %>

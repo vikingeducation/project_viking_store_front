@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     orders.where(checked_out: true)
   end
 
+  def cart
+    orders.where(checked_out: false).first
+  end
+
   def last_checkout_date
     completed_orders.empty? ? "N/A" : completed_orders.order("created_at DESC").last.checkout_date
   end

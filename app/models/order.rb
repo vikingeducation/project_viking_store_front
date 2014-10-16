@@ -12,6 +12,9 @@ class Order < ActiveRecord::Base
             :presence => true
   validates_inclusion_of :checked_out, :in => [true, false]
 
+  accepts_nested_attributes_for :purchases, :reject_if => :all_blank,
+                                            :allow_destroy => true
+
   def value
     products.sum("quantity * price")
   end

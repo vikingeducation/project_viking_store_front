@@ -1,5 +1,12 @@
 class PurchasesController < ApplicationController
 	def create
+    if Purchase.create(create_purchase_params.values)
+      flash[:success] = "New contents added to order."
+      redirect_to orders_path
+    else
+      flash.now[:error] = "Failed to add order contents."
+      render :index # not sure about this one
+    end
   end
 
   def update
@@ -19,5 +26,9 @@ class PurchasesController < ApplicationController
 
   def update_purchase_params
     params.require(:purchases)
+  end
+
+  def whitelisted_purchase_params
+    params.require(:purchases).permit(:product_id => [], :quantity)
   end
 end
