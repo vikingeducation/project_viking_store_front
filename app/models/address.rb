@@ -21,7 +21,7 @@ class Address < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :state
 
-  def address_maker
+  def full_address
     "#{street_address}, #{city.name}, #{state.name} #{zip_code}"
   end
 end
