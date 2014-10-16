@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Admin::CategoriesController < AdminController
   def index
     @categories = Category.all
   end
@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(whitelisted_category_params)
     if @category.save
       flash[:success] = "Category created successfully."
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:error] = "Failed to create Category."
       render 'new'
@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.update_attributes(whitelisted_category_params)
       flash[:success] = "Category updated successfully."
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:error] = "Failed to update Category."
       render 'edit'
@@ -42,7 +42,7 @@ class CategoriesController < ApplicationController
     session[:return_to] ||= request.referer
     if @category.destroy
       flash[:success] = "Category deleted successfully."
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash[:error] = "Failed to delete Category."
       redirect_to session.delete(:return_to)

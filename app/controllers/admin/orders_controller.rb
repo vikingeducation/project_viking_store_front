@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Admin::OrdersController < AdminController
   def index
     if params[:user_id].nil?
       @orders = Order.all

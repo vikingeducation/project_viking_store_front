@@ -1,4 +1,4 @@
-class PurchasesController < ApplicationController
+class Admin::PurchasesController < AdminController
 	def create
     if Purchase.create(create_purchase_params.values)
       flash[:success] = "New contents added to order."

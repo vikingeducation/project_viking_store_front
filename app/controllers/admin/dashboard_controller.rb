@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class Admin::DashboardController < AdminController
   def index
     @all_time = nil
 

@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6">
-    <%= render "shared/errors", :object => category %>
+    <%= render "admin/shared/errors", :object => category %>
 
-    <%= form_for category do |f| %>
+    <%= form_for [:admin, category] do |f| %>
       <h3><%= form_type %> Category</h3>
       <div class="form-group">
         <%= f.label "Category ID:" %>
@@ -14,6 +14,6 @@
       </div>
       <%= f.submit submit(form_type, "Category"), :class => "btn btn-large btn-primary btn-block" %>
     <% end %>
-    <%= (link_to "Delete Category", category_path(@category), :method => :delete, :data => { confirm: "Are you sure?" }) if category.id %>
+    <%= (link_to "Delete Category", admin_category_path(@category), :method => :delete, :data => { confirm: "Are you sure?" }) if category.id %>
   </div>
 </div>
