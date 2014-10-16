@@ -3,4 +3,4 @@
 <p>Owner ID: <%= @user ? @user.id : "N/A" %></p>
 <p>Owner Name: <%= @user ? (link_to @user.name, user_path(@user)) : "N/A" %></p>
 <p>Phone Number: <%= @user ? @user.phone_number : "N/A" %></p>
-<p>Date Placed: <%= @order.created_at %></p>
+<p>Date Placed: <%= display_if(@order.checkout_date) %></p>
