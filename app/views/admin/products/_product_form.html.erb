@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6">
-    <%= render "shared/errors", :object => product %>
+    <%= render "admin/shared/errors", :object => product %>
 
-    <%= form_for product do |f| %>
+    <%= form_for [:admin, product] do |f| %>
       <h3><%= form_type %> product</h3>
       <div class="form-group">
         <%= f.label "Product ID:" %>
@@ -33,6 +33,6 @@
       <%= f.submit submit(form_type, "Product"), :class => "btn btn-large btn-primary btn-block" %>
     <% end %>
 
-    <%= (link_to "Delete Product", product_path(@product), :method => :delete, :data => { confirm: "Are you sure?" }) if product.id %>
+    <%= (link_to "Delete Product", admin_product_path(@product), :method => :delete, :data => { confirm: "Are you sure?" }) if product.id %>
   </div>
 </div>

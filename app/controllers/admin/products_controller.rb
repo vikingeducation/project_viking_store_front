@@ -11,7 +11,7 @@ class Admin::ProductsController < AdminController
     @product = Product.new(whitelisted_product_params)
     if @product.save
       flash[:success] = "Product created successfully."
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       flash.now[:error] = "Failed to create Product."
       render 'new'
@@ -30,7 +30,7 @@ class Admin::ProductsController < AdminController
     @product = Product.find(params[:id])
     if @product.update_attributes(whitelisted_product_params)
       flash[:success] = "Product updated successfully."
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       flash.now[:error] = "Failed to update Product."
       render 'edit'
@@ -42,7 +42,7 @@ class Admin::ProductsController < AdminController
     session[:return_to] ||= request.referer
     if @product.destroy
       flash[:success] = "Product deleted successfully."
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       flash[:error] = "Failed to delete Product."
       redirect_to session.delete(:return_to)
