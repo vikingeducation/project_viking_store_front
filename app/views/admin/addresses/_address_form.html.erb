@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6">
-    <%= render "shared/errors", :object => address %>
+    <%= render "admin/shared/errors", :object => address %>
 
-    <%= form_for address, :url => { :action => (address.id ? :update : :create) } do |f| %>
+    <%= form_for [:admin, address], :url => { :action => (address.id ? :update : :create) } do |f| %>
 
       <h3><%= form_type %> address</h3>
       <div class="form-group">
@@ -13,7 +13,7 @@
 
       <div class="form-group">
         <%= f.label :user %>
-        <%= link_to "#{address.user.name} (Click to view user)", user_path(address.user_id) %>
+        <%= link_to "#{address.user.name} (Click to view user)", admin_user_path(address.user_id) %>
       </div>
 
       <div class="form-group">
@@ -40,7 +40,7 @@
     <% end %>
 
     <%= (link_to "Delete Address",
-    user_address_path(address.user_id, address.id),
+    admin_user_address_path(address.user_id, address.id),
     :method => :delete,
     :data => { confirm: "Are you sure?" }) if address.id %>
   </div>
