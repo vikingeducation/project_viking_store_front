@@ -3,6 +3,7 @@ class Purchase < ActiveRecord::Base
   belongs_to :product
 
   validates :product_id, :quantity, :presence => true
+  validates_presence_of :product
 
   def value
     product.price * quantity

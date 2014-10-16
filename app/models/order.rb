@@ -10,6 +10,8 @@ class Order < ActiveRecord::Base
 
   validates :user_id,
             :presence => true
+  validates_presence_of :user
+
   validates_inclusion_of :checked_out, :in => [true, false]
 
   accepts_nested_attributes_for :purchases, :reject_if => :all_blank,
