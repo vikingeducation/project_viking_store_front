@@ -5,18 +5,18 @@
 }
 
 nav.navbar-swedish {
-  background: linear-gradient($flag-dark-blue, $flag-blue);
+  background: $dark-normal;
   a {
     color: $flag-yellow;
   }
 
   li a:hover {
-    background-color: $flag-light-blue;
+    background: $normal-light;
   }
 }
 
 .main-footer {
-  background: linear-gradient($flag-blue, $flag-dark-blue);
+  background: $normal-dark;
   color: $flag-yellow;
   a {
     color: $flag-yellow;
@@ -25,5 +25,14 @@ nav.navbar-swedish {
       color: $flag-yellow;
       background-color: $flag-light-blue;
     }
+  }
+}
+
+button.btn-swedish {
+  background: $normal-dark;
+  color: $flag-yellow;
+  &:hover {
+    color: $flag-yellow;
+    background: $light-normal;
   }
 }

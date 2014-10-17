@@ -18,7 +18,7 @@ article.product-panel {
   header div h4 {
     text-align: center;
     color: $flag-yellow;
-    background-color: $flag-dark-blue;
+    background: $normal-dark;
     border-radius: 5px 5px 0 0;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -26,17 +26,17 @@ article.product-panel {
 
   .middle div.description {
     height: 150px;
-    border-left: 1px solid $flag-dark-blue;
+    border-left: 1px solid $flag-blue;
     border-right: 1px solid $flag-blue;
     .price-ribbon {
-      border: 1px solid $flag-dark-blue;
+      border: 1px solid $flag-light-blue;
       float: right;
     }
   }
 
   footer div p {
     text-align: center;
-    background-color: $flag-dark-blue;
+    background: $dark-normal;
     border-radius: 0 0 5px 5px;
   }
 }
