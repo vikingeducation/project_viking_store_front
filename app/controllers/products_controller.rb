@@ -11,9 +11,11 @@ class ProductsController < ApplicationController
         else
           session[:cart][item] = 1
         end
-        flash.now[:success] = "Item added to cart"
+        flash[:success] = "Item added to cart"
+        redirect_to products_path
       else
-        flash.now[:error] = "Product is invalid"
+        flash[:error] = "Product is invalid"
+        redirect_to products_path
       end
     end
   end
