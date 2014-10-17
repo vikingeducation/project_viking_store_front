@@ -16,7 +16,10 @@
   </div>
   <footer class="row">
     <div class="col-md-12">
-      <p><%= link_to "Add to Cart", "#" %></p>
+      <form action="<%= products_path %>" method="GET">
+        <%= hidden_field_tag(:item, product.id) %>
+        <p><button type="submit" class="btn btn-swedish btn-submit">Add to Cart</button></p>
+      </form>
     </div>
   </footer>
 </article>
