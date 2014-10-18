@@ -1,0 +1,7 @@
+<li><%= link_to category.name, admin_category_path(category) %>
+
+<%= link_to "Edit", edit_admin_category_path(category.id) %>
+<%= link_to "Delete", admin_category_path(category), method: :delete, 
+		data: { confirm: "You sure?" } %>
+
+</li>

@@ -1,0 +1,78 @@
+class Admin::AddressesController < AdminController
+  def index
+    if (params[:user_id] != nil)
+      confirm_user_id
+    else
+      @addresses=Address.all
+    end
+    
+  end
+
+  def show
+    @address = Address.find(params[:id])
+    
+  end
+
+  def new
+    @user = User.find(params[:user_id])
+    @address = Address.new
+    
+  end
+
+  def create
+    @address = Address.new(address_params)
+    if @address.save
+      flash[:success] = "Address \"#{@address.street_address}\" has been successfully created!"
+      redirect_to admin_user_admin_addresses_path(@address.user_id)
+    else
+      flash[:error] = "Address was not created, please try again"
+      @user=User.find(@address.user_id)
+      render 'new'
+    end
+  end
+
+  def edit
+    @address = Address.find(params[:id])
+    @user=User.find(@address.user_id)
+  end
+
+  def update
+    @address = Address.find(params[:id])
+      if @address.update(address_params)
+        flash[:success] = "Address  \"#{@address.street_address}\" edited successfully"
+        redirect_to admin_address_path(@address)
+      else
+        flash[:error] = "Whoops!"
+        @user=User.find(@address.user_id)
+        render 'edit'
+      end
+  end
+
+  def destroy
+   @address = Address.find(params[:id])
+    if Address.find(params[:id]).destroy
+      flash[:success] = "Address #{@address.street_address} successfully deleted."
+      redirect_to admin_addresses_path
+    else
+      redirect_to admin_address_path(@address)
+    end
+  end
+
+  private
+
+  def address_params
+    params.require(:address).permit(:user_id,:street_address, :city,:state,:zip)
+  end
+
+
+  def confirm_user_id
+    if Address.where(id: params[:user_id]).empty?
+        @addresses=Address.all
+    else
+        @addresses=Address.where(user_id: params[:user_id])
+        @filtered = true
+        @params_user_id = params[:user_id]
+    end
+  end
+
+end
