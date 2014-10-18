@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :products, only: [:index, :show]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :edit, :update, :destroy]
 
   namespace :admin do
     root 'dashboard#index'

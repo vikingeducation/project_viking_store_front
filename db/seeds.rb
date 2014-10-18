@@ -1,29 +1,36 @@
+
+
 # Make sure your seeds file blows away any existing models every time it starts running: JUST RUN THIS WITH RAKE db:reset
 
-#SCALAR == 5 => 155 Cities, 125 Users, <125 Orders, ~360 order items
-puts "********Begin Seeding Data************"
-t = Time.now
-SCALAR = 5 # Seed multiplier
+#scalar 10 => about 1,000 Cities, 1,000 Users, <1,000 Orders
+
+SCALAR = 3 # Seed multiplier; caution: exponential data increase
 
 #generate products
+sample_categories = []
+
 SCALAR.times do
-  Category.new( {
-    name:        Faker::Commerce.department(1),
-    description: Faker::Lorem.sentence
-  } ).save
+  sample_categories << Faker::Commerce.department
 end
 
-(SCALAR*10).times do
-  Product.new( {
-    name:        Faker::Commerce.product_name,
-    category_id: rand(Category.count)+1,
-    description: Faker::Lorem.sentence,
-    sku:         (Faker::Code.ean).to_i,
-    price:       Faker::Commerce.price
-  } ).save
+sample_categories.each do |name|
+  category = Category.new()
+  category[:name]        = name
+  category[:description] = Faker::Lorem.sentence
+  category.save
 end
 
-#generate addresses, SCALAR*31 cities
+(SCALAR**2).times do
+  p = Product.new()
+  p[:name]        = Faker::Commerce.product_name
+  p[:category_id] = rand(Category.count)+1
+  p[:description] = Faker::Lorem.sentence
+  p[:sku]         = (Faker::Code.ean).to_i
+  p[:price]       = Faker::Commerce.price
+  p.save
+end
+ 
+#generate addresses, SCALAR*111 cities
 states =
 ["Alabama", "Alaska", "Arizona", "Arkansas", "California",
 "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
@@ -37,24 +44,26 @@ states =
 "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
 states.each do |state|
-  State.new({:name => state}).save
+  state = State.new({:name => state})
+  state.save
 end
 
 def sample_city # generates a new city/state/zip combination
   city = City.new({:name => Faker::Address.city})
-  city.save
-  { "city" => city.id,
-    "state" => (rand(50)+1),
-    "zip" => (Faker::Address.zip_code).to_i }
+  if city.save
+    {"city" => city.id, "state" => (rand(50)+1), "zip" => (Faker::Address.zip_code).to_i}
+  else #sometimes the city already exists because we double up on a name
+    {"city" => rand(City.count), "state" => (rand(50) + 1), "zip" => (Faker::Address.zip_code).to_i}
+  end
 end
 
 def sample_cities # appends city/state/zip combinations to three echelons in an array, with more instances for each successive echelon
   cities, towns, villages = [], [], []
   SCALAR.times do
     cities << sample_city
-    5.times do
+    10.times do
       towns << sample_city
-      5.times do
+      10.times do
         villages << sample_city
       end
     end
@@ -76,29 +85,22 @@ end
 def generate_addresses(user_id)
   (rand(6)).times do
     city_instance = city_sampling
-    Address.new( {
-      user_id:        user_id,
-      street_address: Faker::Address.street_address,
-      city_id:        city_instance["city"],
-      state_id:       city_instance["state"],
-      zip_code:       city_instance["zip"],
-      phone_number:   Faker::PhoneNumber.phone_number
-    } ).save!
+    a = Address.new()
+    a[:user_id] = user_id
+    a[:street_address] = Faker::Address.street_address
+    a[:city_id] = city_instance["city"]
+    a[:state_id] = city_instance["state"]
+    a[:zip_code] = city_instance["zip"]
+    a[:phone_number] = Faker::PhoneNumber.phone_number
+    if a[:city_id] == nil
+      puts "****/\n\n\n a:#{a}\n\ncity-instance:#{city_instance}\n\n********" 
+      p Address.all
+    end
+    a.save
   end
 end
-
-#generate credit cards
-def generate_card(user_id)
-  CreditCard.new({
-    user_id:      user_id,
-    card_number:  Faker::Business.credit_card_number,
-    exp_month:    rand(12)+1,
-    exp_year:     2014+rand(10),
-    ccv:          Faker::Number.number(3)
-  }).save
-end
-
-#generate users, SCALAR*25 users
+ 
+#generate users, SCALAR**2 users
 def creation_date
   time_frames = []
   SCALAR.times do |x|
@@ -108,38 +110,33 @@ def creation_date
   rand(date_range)
 end
 
-(SCALAR*25).times do |x|
+(SCALAR**3).times do |x|
   sample_name = [Faker::Name.first_name, Faker::Name.last_name]
-  generate_card(x+1)
-
-  u = User.new( {
-    first_name:  sample_name[0],
-    last_name:   sample_name[1],
-    email:       Faker::Internet.email(sample_name.join(" ")),
-    created_at:  creation_date,
-    phone_number:   Faker::PhoneNumber.phone_number
-  } )
-  u.save
-
   generate_addresses(x+1)
 
+  u = User.new()
+  u[:first_name]  = sample_name[0]
+  u[:last_name]   = sample_name[1]
+  u[:email]       = Faker::Internet.email(sample_name.join(" "))
   u[:billing_id]  = random_user_address(x+1)
   u[:shipping_id] = random_user_address(x+1)
+  u[:created_at]  = creation_date
+
   u.save
 end
 
 #generate order contents
 def generate_contents(order_id)
   (rand(10)+1).times do
-    Purchase.new( {
-      order_id:   order_id,
-      product_id: rand(Product.count)+1,
-      quantity:   rand(10)+1
-    } ).save
+    c = Purchase.new()
+    c[:order_id]   = order_id
+    c[:product_id] = rand(Product.count)+1
+    c[:quantity]   = rand(10)+1
+    c.save
   end
 end
 
-#generate orders; up to SCALAR*25 orders
+#generate orders
 def no_cart?(user_id)
   Order.where(:checked_out => false, :user_id => user_id).empty?
 end
@@ -156,22 +153,29 @@ def placement_date(user)
   rand(user[:created_at]..Time.now)
 end
 
-(SCALAR*25).times do
-  sample_user = User.find(rand(User.count)+1)
+(SCALAR**3).times do
+  sample_user = User.find((rand(User.count).to_i)+1)
   if sample_user[:billing_id] || no_cart?(sample_user[:id])
     completed_order = completion(sample_user)
-    o = Order.new( {
-      user_id:       sample_user.id,
-      shipping_id:   random_user_address(sample_user.id),
-      billing_id:    random_user_address(sample_user.id),
-      checked_out:   completed_order,
-      checkout_date: (placement_date(sample_user) if completed_order)
-    } )
-    o.save
+    o = Order.new()
+    o[:user_id]        = sample_user.id
+    o[:shipping_id]   = random_user_address(sample_user.id)
+    o[:billing_id]    = random_user_address(sample_user.id)
+    o[:checked_out]   = completed_order
+    o[:checkout_date] = placement_date(sample_user) if completed_order
+    next unless o.save
     generate_contents(o[:id])
   end
 end
 
-q = Time.now
-puts "********Seeding Data End************"
-puts"********Seeding took #{q-t} seconds, I think************"
+users_with_orders = Order.all.select("DISTINCT user_id")
+
+users_with_orders.each do |user|
+  card = CreditCard.new
+  card[:user_id] = user.user_id
+  card[:card_number] = Faker::Business.credit_card_number
+  card[:exp_month] = rand(12) + 1
+  card[:exp_year] = Time.now.year + rand(5) #so far, only good cards
+  card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
+  card.save
+end
