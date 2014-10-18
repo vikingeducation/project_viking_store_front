@@ -21,12 +21,22 @@
           <%= address_fields.text_field :zip_code, {class:"form-control"} %>
         </div>
 
+        <div class="form-group">
+          <%= address_fields.label :billing_address %>
+          <%= check_box_tag [address_fields.index,:billing] %>
+        </div>
+
+        <div class="form-group">
+          <%= address_fields.label :shipping_address %>
+          <%= check_box_tag [address_fields.index, :shipping] %>
+        </div>
 
         <div class="form-group">
           <%= address_fields.label :delete %>
           <%= address_fields.check_box :_destroy%>
         </div>
     </div>
+
   <% end %>
 
 <div class = "panel col-md-6 col-xs-12">

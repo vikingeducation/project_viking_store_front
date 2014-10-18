@@ -1,5 +1,9 @@
 @import 'colors';
 
+h1 {
+  text-align: center;
+}
+
 .navbar-offset {
   padding-top: 50px;
 }
@@ -28,7 +32,7 @@ nav.navbar-swedish {
   }
 }
 
-button.btn-swedish, input.btn-swedish {
+button.btn-swedish, input.btn-swedish, a.btn-swedish {
   background: $normal-dark;
   color: $flag-yellow;
   &:hover {

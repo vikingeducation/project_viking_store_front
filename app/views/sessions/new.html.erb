@@ -1,5 +1,14 @@
-<form action="<%= sessions_path %>" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-  <input id="email" name="email" type="email" class="form-control" />
-  <p><button type="submit" class="btn btn-swedish btn-submit">Sign In</button></p>
-</form>
+<h1> Sign Up or Sign In </h1>
+
+<div class="panel col-sm-6 col-xs-12">
+	<%= form_tag sessions_path, method: "post" do %>
+	  <%= text_field_tag :email, nil, placeholder: "Enter your email", class: "form-control form-group" %>
+	  <%= text_field_tag :password, nil, placeholder: "Enter your password", class: "form-control form-group" %>
+	  <%= submit_tag "Sign In", class: "btn btn-swedish btn-lg btn-block btn-create" %>
+  <% end %>
+</div>
+<div class="panel col-sm-6 col-xs-12">
+	<%= link_to "Sign Up", new_user_path, class: "btn btn-swedish btn-lg btn-block btn-create" %>
+</div>
+
+

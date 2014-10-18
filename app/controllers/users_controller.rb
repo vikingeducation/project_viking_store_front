@@ -7,12 +7,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(whitelisted_params)
-
+    asdf
     if @user.save
       flash[:success] = "Wanna buy an axe?"
+      sign_in(@user)
       redirect_to products_path
     else
-      adfsjkladsfjkljksadljkldfs
       flash[:error] = "Signup failed because REASONS."
       render :new
     end
