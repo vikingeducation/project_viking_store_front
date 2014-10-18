@@ -20,12 +20,16 @@ root 'admin#index'
       end
   end
 
+  resources :products
+  resources :order_contents, only: [:new]
 
 
 
 
-  get 'addresses/params[:user_id]' => 'addresses#index'
-  get 'orders/params[:user_id]' => 'orders#index'
+  get 'admin/addresses/params[:user_id]' => 'admin/addresses#index'
+  get 'admin/orders/params[:user_id]' => 'admin/orders#index'
+
+  get 'products/params[:category_id]' => 'products#index', :as => 'category_filter'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

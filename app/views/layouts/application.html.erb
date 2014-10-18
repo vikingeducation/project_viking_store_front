@@ -13,7 +13,11 @@
 				<div class="alert alert-<%= key %>"><%= value %></div>
 			<% end %>
 		</div>
+		<%= render 'layouts/outer_header' %> <%# customer-facing %>
+		<%= render 'layouts/jumbotron' %><%# customer-facing %>
 					<%= yield %>
+		<%= render 'layouts/footer' %>
+
 	</div>
 
 </body>
