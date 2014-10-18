@@ -19,10 +19,21 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
+
+    if @user.update(whitelisted_params)
+      set_defaults
+      flash[:success] = "Account updated."
+      redirect_to products_path
+    else
+      flash[:error] = "Something went wrong."
+      render :edit
+    end
   end
 
   def edit
-
+    @user = current_user
+    @user.addresses.build
   end
 
   def destroy
@@ -62,12 +73,16 @@ class UsersController < ApplicationController
     billing = params[:user][:billing_id]
     shipping = params[:user][:shipping_id]
 
+
     if billing
-      @user.billing = @user.addresses.find_by(street_address: addresses[billing][:street_address])
+      billing_street = addresses[billing][:street_address]
+      @user.billing = @user.addresses.find_by(street_address: billing_street)
     end
     if shipping
-      @user.shipping = @user.addresses.find_by(street_address: addresses[shipping][:street_address])
+      shipping_street = addresses[shipping][:street_address]
+      @user.shipping = @user.addresses.find_by(street_address: shipping_street)
     end
+
     @user.save
   end
 
