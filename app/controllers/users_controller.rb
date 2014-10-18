@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(whitelisted_params)
-    asdf
     if @user.save
+      set_defaults
       flash[:success] = "Wanna buy an axe?"
       sign_in(@user)
       redirect_to products_path
@@ -57,5 +57,18 @@ class UsersController < ApplicationController
 
   end
 
+  def set_defaults
+    addresses = params[:user][:addresses_attributes]
+    billing = params[:user][:billing_id]
+    shipping = params[:user][:shipping_id]
+
+    if billing
+      @user.billing = @user.addresses.find_by(street_address: addresses[billing][:street_address])
+    end
+    if shipping
+      @user.shipping = @user.addresses.find_by(street_address: addresses[shipping][:street_address])
+    end
+    @user.save
+  end
 
 end

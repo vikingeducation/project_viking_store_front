@@ -40,3 +40,9 @@ button.btn-swedish, input.btn-swedish, a.btn-swedish {
     background: $light-normal;
   }
 }
+
+.field_with_errors {
+  * {
+    border-color: red;
+  }
+}
