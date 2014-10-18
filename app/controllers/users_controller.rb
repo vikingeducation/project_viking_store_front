@@ -40,6 +40,7 @@ class UsersController < ApplicationController
     address_keys = addresses.keys
 
     address_keys.each do |key|
+      next if addresses[key][:city_id] == ""
       addresses[key][:city_id] = check_city(key, addresses[key][:city_id])
     end
 

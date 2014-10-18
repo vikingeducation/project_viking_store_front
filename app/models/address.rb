@@ -18,7 +18,6 @@ class Address < ActiveRecord::Base
                        length: { is: 5 }
   validates :street_address, length: {maximum: 64}
 
-  validates_presence_of :user
   validates_presence_of :state
 
   def full_address
