@@ -7,29 +7,32 @@
 
   <%= user_fields.fields_for :addresses do |address_fields| %>
     <div class = "panel col-md-6 col-xs-12">
-        <div class="form-group">      
-          <%= address_fields.label :street_address %>      
+        <div class="form-group">
+          <%= address_fields.label :street_address %>
           <%= address_fields.text_field :street_address, {class:"form-control"} %>
         </div>
-        <div class="form-group">      
-          <%= address_fields.label :city %>      
-          <%= address_fields.text_field :city, {class:"form-control"} %>  
+        <div class="form-group">
+          <%= address_fields.label :city %>
+          <%= address_fields.text_field :city, {class:"form-control"} %>
         </div>
-            
-        <div class="form-group">      
+
+        <div class="form-group">
           <%= address_fields.collection_select :state_id, State.all, :id, :name, prompt: "Pick a State" %>
           <%= address_fields.text_field :zip_code, {class:"form-control"} %>
         </div>
 
-        <div class="form-group">      
-          <%= address_fields.label :billing %>
-          <%= address_fields.check_box :billing %>
-        </div>
-        <div class="form-group">      
-          <%= address_fields.label :shipping %>
-          <%= address_fields.check_box :shipping %>
-        </div>
-        <div class="form-group">      
+        <%= address_fields.fields_for :user do |address_user_fields| %>
+          <div class="form-group">
+            <%= address_user_fields.label :billing_id %>
+            <%= address_user_fields.check_box :billing_id %>
+          </div>
+          <div class="form-group">
+            <%= address_user_fields.label :shipping_id %>
+            <%= address_user_fields.check_box :shipping_id %>
+          </div>
+        <% end %>
+
+        <div class="form-group">
           <%= address_fields.label :delete %>
           <%= address_fields.check_box :_destroy%>
         </div>
@@ -38,31 +41,31 @@
 
 <div class = "panel col-md-6 col-xs-12">
 
-  <div class="form-group">  
+  <div class="form-group">
     <%= user_fields.label :email %>
     <%= user_fields.email_field :email, {class:"form-control"}%>
   </div>
-  
-  <div class="form-group"> 
+
+  <div class="form-group">
     <%= user_fields.label :confirm_email %>
     <%= user_fields.email_field :email, {class:"form-control"} %>
   </div>
-  <div class="form-group"> 
+  <div class="form-group">
     <%= user_fields.label :password %>
     <%= user_fields.password_field :password, {class:"form-control"} %>
   </div>
-  <div class="form-group"> 
+  <div class="form-group">
     <%= user_fields.label :confirm_password %>
     <%= user_fields.password_field :password, {class:"form-control"} %>
-  <div class="form-group"> 
+  <div class="form-group">
     <%= user_fields.label :first_name %>
     <%= user_fields.text_field :first_name, {class:"form-control"} %>
   </div>
-  <div class="form-group"> 
+  <div class="form-group">
     <%= user_fields.label :last_name %>
     <%= user_fields.text_field :last_name, {class:"form-control"} %>
   </div>
-  <div class="form-group">     
+  <div class="form-group">
     <%= user_fields.label :phone_number %>
     <%= user_fields.text_field :phone_number, {class:"form-control"} %>
   </div>

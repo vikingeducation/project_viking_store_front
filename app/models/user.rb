@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   has_many :products, through: :orders
   has_one :credit_card, :dependent => :destroy
 
+  accepts_nested_attributes_for :addresses, :reject_if => :all_blank,
+                                            :allow_destroy => true
+
   validates :first_name, :last_name, :email, presence: true,
                                              length: { maximum: 64 }
   validates :email,
