@@ -19,13 +19,14 @@ root 'admin#index'
         resources :orders
       end
   end
+  resources :users
 
   resources :products
   get '/cart' => 'order_contents#index'
   resources :sessions, :only => [:new, :create, :destroy]
 
   get '/signin' => 'sessions#new'
-
+  get '/signup' => 'users#new'
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
 

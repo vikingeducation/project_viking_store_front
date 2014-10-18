@@ -29,4 +29,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :signed_in_user?
 
+  def login_required
+    redirect_to('/') if current_user.blank?
+  end
+
 end

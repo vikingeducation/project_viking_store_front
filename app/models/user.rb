@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: {minimum: 1, maximum:64},
             format: { with: VALID_EMAIL_REGEX }
 
+  validates_confirmation_of :email, :message => "email should match confirmation"
+
   after_destroy :cart_cleanup
 
 

@@ -1,0 +1,30 @@
+<%= form_for(@user) do |user| %>	
+	<%= render 'shared/error_messages', object: user.object %>
+
+<div class="col-xs-6">
+Address
+
+</div>
+<div class="col-xs-6">
+	<h3>Account Information</h3>
+	<%= user.label :email, "Email Address" %>
+	<%= user.text_field :email  %>
+
+	<%= user.label :email_confirmation, "Email Confirm" %>
+	<%= user.text_field :email_confirmation %>
+
+
+	<%= user.label :first_name, "First Name" %>
+	<%= user.text_field :first_name %>
+
+	<%= user.label :last_name, "Last Name" %>
+	<%= user.text_field :last_name %>
+
+
+	<%= user.label :phone, "Tel Number (optional)" %>
+	<%= user.text_field :phone %>
+	<%= user.submit %>
+
+</div>
+
+<% end %>
