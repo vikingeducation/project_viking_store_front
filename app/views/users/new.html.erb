@@ -1,35 +1,77 @@
-<h2>New User</h2>
+<h2>Sign Up</h2>
 
 <%= render "shared/errors", :object => @user %>
 
 <%= form_for @user do |user_fields| %>
 
 
-  <%= fields_for :addresses do |address_fields| %>
-    <div class = "panel">
-      <%= address_fields.text_field :street_address %>
-      <%= address_fields.text_field :city %>
-      <%= address_fields.collection_select :state_id, State.all, :id, :name, prompt: "Pick a State" %>
-      <%= address_fields.text_field :zip_code %>
+  <%= user_fields.fields_for :addresses do |address_fields| %>
+    <div class = "panel col-md-6 col-xs-12">
+        <div class="form-group">      
+          <%= address_fields.label :street_address %>      
+          <%= address_fields.text_field :street_address, {class:"form-control"} %>
+        </div>
+        <div class="form-group">      
+          <%= address_fields.label :city %>      
+          <%= address_fields.text_field :city, {class:"form-control"} %>  
+        </div>
+            
+        <div class="form-group">      
+          <%= address_fields.collection_select :state_id, State.all, :id, :name, prompt: "Pick a State" %>
+          <%= address_fields.text_field :zip_code, {class:"form-control"} %>
+        </div>
 
-
-      <%= address_fields.check_box :billing %>
-      <%= address_fields.check_box :shipping %>
-      <%= address_fields.check_box :_destroy %>
+        <div class="form-group">      
+          <%= address_fields.label :billing %>
+          <%= address_fields.check_box :billing %>
+        </div>
+        <div class="form-group">      
+          <%= address_fields.label :shipping %>
+          <%= address_fields.check_box :shipping %>
+        </div>
+        <div class="form-group">      
+          <%= address_fields.label :delete %>
+          <%= address_fields.check_box :_destroy%>
+        </div>
     </div>
-
   <% end %>
 
+<div class = "panel col-md-6 col-xs-12">
 
-
-
-<div class = "panel">
-
+  <div class="form-group">  
+    <%= user_fields.label :email %>
+    <%= user_fields.email_field :email, {class:"form-control"}%>
+  </div>
+  
+  <div class="form-group"> 
+    <%= user_fields.label :confirm_email %>
+    <%= user_fields.email_field :email, {class:"form-control"} %>
+  </div>
+  <div class="form-group"> 
+    <%= user_fields.label :password %>
+    <%= user_fields.password_field :password, {class:"form-control"} %>
+  </div>
+  <div class="form-group"> 
+    <%= user_fields.label :confirm_password %>
+    <%= user_fields.password_field :password, {class:"form-control"} %>
+  <div class="form-group"> 
+    <%= user_fields.label :first_name %>
+    <%= user_fields.text_field :first_name, {class:"form-control"} %>
+  </div>
+  <div class="form-group"> 
+    <%= user_fields.label :last_name %>
+    <%= user_fields.text_field :last_name, {class:"form-control"} %>
+  </div>
+  <div class="form-group">     
+    <%= user_fields.label :phone_number %>
+    <%= user_fields.text_field :phone_number, {class:"form-control"} %>
+  </div>
 </div>
 
 <div class = "panel">
-
-    <%= user_fields.submit %>
+  <h3>Complete Sign Up</h3>
+  <%= user_fields.submit "Sign Up", {class: "btn btn-default btn-primary"} %>
+  <%= link_to("Delete my account", delete_user_path(@user.id)) if @user.id %>
 </div>
 
 
