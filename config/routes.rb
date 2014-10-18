@@ -21,9 +21,12 @@ root 'admin#index'
   end
 
   resources :products
-  resources :order_contents, only: [:new]
+  get '/cart' => 'order_contents#index'
+  resources :sessions, :only => [:new, :create, :destroy]
 
+  get '/signin' => 'sessions#new'
 
+  match '/signout', to: 'sessions#destroy', via: 'delete'
 
 
   get 'admin/addresses/params[:user_id]' => 'admin/addresses#index'

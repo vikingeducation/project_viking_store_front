@@ -1,0 +1,9 @@
+<h2>Shopping Cart Contents</h2>
+
+<% if @cart %>
+	<% @cart.each do |item,quantity| %>
+	<p>Product ID: <%= item %></p>
+	<p>Quantity: <%= quantity %></p>
+	<% end %>
+
+<% end %>

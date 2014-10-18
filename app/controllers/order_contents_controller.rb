@@ -1,5 +1,5 @@
 class OrderContentsController < ApplicationController
-  def new
-    fail
+  def index
+    @cart = session[:cart]
   end
 end
