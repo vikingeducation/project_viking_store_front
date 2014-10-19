@@ -8,10 +8,12 @@ class OrderContentsController < ApplicationController
   def get_user_cart
     if current_user
       cart = OrderContent.find_by(order_id: Order.where("is_placed=?",false).find_by(user_id: current_user.id))
-      product_name = Product.find(cart.product_id).title
-      product_id = cart.product_id
-      session[:cart][product_name] = product_id
-      session[:cart]
+      if Product.find(cart.product_id)
+        product_name = Product.find(cart.product_id).title
+        product_id = cart.product_id
+        session[:cart][product_name] = product_id
+        session[:cart]
+      end
     else
       session[:cart]
     end

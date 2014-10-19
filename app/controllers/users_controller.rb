@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if User.find(params[:id]).destroy
-      session[:current_user_id] = nil
+      sign_out
       flash[:success] = "User #{@user.first_name} #{@user.last_name} deleted."
       redirect_to products_path
     else
