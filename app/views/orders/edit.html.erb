@@ -1,55 +1,36 @@
-<h1>Shopping Cart Contents</h1>
+<h1>Check out</h1>
 
-<%= form_tag  %>
-  <div class ="panel">
+<%= form_for @order do |order_fields| %>
+  <div class="panel">
+    <h2>Shipping + Billing</h2>
+  </div>
 
-    <%= fields_for :purchases do |purchase| %>
-      <div class="row">
+  <div class="panel">
+    <h2>Review + Complete</h2>
 
-        <div class="panel col-xs-8">=
-          <div class="product-image col-xs-3"></div>
-
-          <div class="product-name col-xs-6 pull-left">
-            <div class="col-md-">
-              <h3><%= purchase.product.name %></h3>
-            </div>
-            <div class="category">
-              <p><%= purchase.product.category %></p>
-            </div>
-            <div class="col-xs-3">
-              <%= number_to_currency(purchase.product.price) %>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel col-xs-4">
-
-          <%= purchase.label :quantity %>
-          <%= purchase.text_field [:product, :quantity]%>
-
-          <%= purchase.label :total_price %>
-          <span><%=%><span> <!-- @total_price -->
-          <%= purchase.check_box "Remove item", :_destroy %>
-        </div>
-
-      </div>
-    <% end %>
-
-    <div class="panel cart-total col-xs-12 col-sm-8">
-      <h4>Total</h4>
-      <!-- @total -->
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Item Price</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render 'order', :purchases => @order.purchases %>
+        </tbody>
+      </table>
     </div>
 
-    <div class="checkout-buttons col-xs-12 col-sm-4">
-      <div class="update-contents">
-        <%= cart.submit %>
-      </div>
-      <div class="check-out">
-        <%= link_to "Check Out", order_path, {method: 'post'} %>
-      </div>
+    <div class="order-total">
     </div>
 
   </div>
+
+  <div class="panel">
+    <h2>Place Order</h2>
+  </div>
+
 <% end %>
-
-

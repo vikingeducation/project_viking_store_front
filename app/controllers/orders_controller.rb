@@ -11,15 +11,15 @@ class OrdersController < ApplicationController
 			@order = current_user.cart.first
 			@order.purchases.destroy
 		else
-			@order = Order.new
+			@order = current_user.orders.build(checked_out: false)
 		end
 
 		session[:cart].each do |k, v|
-			@order.build(product_id: k,
+			@order.purchases.build(product_id: k,
 									 quantity: v)
 		end
-		@order.save
-		redirect_to 'edit'
+		@order.save!
+		redirect_to edit_order_path(@order)
 	end
 
 	def edit

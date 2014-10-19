@@ -1,0 +1,8 @@
+<% purchases.each do |purchase| %>
+  <tr>
+    <td><%= purchase.product.name %></td>
+    <td><%= purchase.quantity %></td>
+    <td><%= purchase.product.price %></td>
+    <td><%= purchase.value %></td>
+  </tr>
+<% end %>
