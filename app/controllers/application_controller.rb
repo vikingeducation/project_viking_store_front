@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   def sign_in(user)
     session[:current_user_id] = user.id
     current_user = user
-    session.delete(:cart)
+    #session.delete(:cart)
   end
 
   def sign_out
-    session[:current_user_id] = nil && current_user = nil
+    session.delete(:current_user_id) && current_user == nil
   end
 
   def current_user
