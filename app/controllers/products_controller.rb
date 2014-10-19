@@ -28,5 +28,22 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @cart = session[:cart]
+
+    params[:order].each do |product_id, quantity|
+      session[:cart][product_id] = quantity
+      session[:cart].delete(product_id) if quantity == ("0" || "")
+    end
+
+    if params[:remove]
+
+      params[:remove].each do |product_id, _true|
+        session[:cart].delete(product_id)
+      end
+
+    end
+
+    flash[:success] = "Updated your order quantities."
+    render :edit
   end
 end

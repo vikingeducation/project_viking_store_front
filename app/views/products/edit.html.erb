@@ -26,11 +26,11 @@
         <div class="panel col-xs-4">
 
           <%= label_tag :quantity %>
-          <%= text_field_tag "#{product_id}", quantity %>
+          <%= text_field_tag "[order]#{product_id}", quantity %>
 
           <%= label_tag :total_price %>
           <span><%=%><span> <!-- @total_price -->
-          <%= check_box_tag "Remove item", "#{product_id}[remove]" %>
+          <%= check_box_tag "[remove]#{product_id}" %>
         </div>
 
       </div>
