@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params['session'][:email])
     if user
-      sign_in user
+      sign_in(user)
       flash[:success] = "Signed in!"
       redirect_to products_path
     else
