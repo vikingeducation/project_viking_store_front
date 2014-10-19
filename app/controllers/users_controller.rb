@@ -52,7 +52,11 @@ class UsersController < ApplicationController
 
   def whitelisted_params
     check_cities
-    params.require(:user).permit(:email, :first_name, :last_name, :phone_number, {:addresses_attributes => [:id, :user_id, :street_address, :city_id, :state_id, :zip_code, :_destroy]})
+    params.require(:user).permit(:email,
+                                :first_name,
+                                :last_name,
+                                :phone_number,
+                                {:addresses_attributes => [:id, :user_id, :street_address, :city_id, :state_id, :zip_code, :_destroy]})
   end
 
   def check_cities

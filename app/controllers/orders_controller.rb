@@ -34,6 +34,19 @@ class OrdersController < ApplicationController
 	end
 
 	def update
+		@order = Order.find(params[:id])
+
+		if @order.update(checkout_params)
+			flash[:success] = "You just bought some axes!"
+			@order.checked_out = true
+			@order.checkout_date = Time.now
+			@order.save
+			session.delete(:cart)
+			redirect_to root_path
+		else
+			flash[:error] = "There is something wrong with your order."
+			render :edit
+		end
 	end
 
 	private
@@ -51,4 +64,16 @@ class OrdersController < ApplicationController
       redirect_to new_session_path
     end
   end
+
+  def checkout_params
+  	params.require(:order).permit(:id,
+  																:shipping_id,
+  																:billing_id,
+  																{:credit_card_attributes => [:id,
+													  																	 :card_number,
+													  																	 :exp_month,
+													  																	 :exp_year,
+													  																	 :ccv]})
+  end
+
 end
