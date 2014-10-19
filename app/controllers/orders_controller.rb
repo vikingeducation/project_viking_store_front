@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
 
 	before_action :verify_user, only: [ :create, :edit ]
+  before_action :verify_cart, only: [ :create ]
 
 	def index
 	end
@@ -30,6 +31,13 @@ class OrdersController < ApplicationController
 	end
 
 	private
+
+  def verify_cart
+    if session[:cart].empty?
+      flash[:error] = "Empty cart! Do more shopping first."
+      redirect_to root_path
+    end
+  end
 
   def verify_user
     unless signed_in_user?
