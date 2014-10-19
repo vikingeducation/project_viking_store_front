@@ -17,12 +17,13 @@ class SessionsController < ApplicationController
 
   # Sign out our user to destroy a session
   def destroy
-    user = current_user
+    #user = current_user
     if sign_out
       flash[:success] = "You have successfully signed out"
       redirect_to products_path
     else
       flash[:error] = "Unable to sign out."
+
       redirect_to products_path
     end
   end
