@@ -11,7 +11,7 @@
     <div class="form-group">
       <%= order_fields.label :billing %>
       <%= order_fields.collection_select :billing_id, @order.user.addresses, :id, :street_address, { default: @order.user.billing.id}, {class: "form-control"} %><br>
-      <%= link_to("Edit Saved Addresses", "#") %>
+      <%= link_to("Edit Saved Addresses", edit_user_path(@order.user)) %>
     </div>
     <br>
     <br>

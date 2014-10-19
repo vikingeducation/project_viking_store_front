@@ -71,10 +71,20 @@
   </div>
 </div>
 
-<div class = "panel col-md-6 col-xs-12">
-  <h3>Complete Sign Up</h3>
-  <%= user_fields.submit "Sign Up", {class: "btn btn-swedish btn-block"} %>
-  <%= link_to("Delete my account", user_path(@user.id), method: "delete", data: {confirm: "Do you really want to quit this site when we know where you live and have axes?"}) if @user.id %>
-</div>
+<% if @user.persisted? %>
+  <div class = "panel col-md-6 col-xs-12">
+    <h3>Submit Changes</h3>
+    <%= user_fields.submit "Edit Your Profile", {class: "btn btn-swedish btn-block"} %>
+    <%= link_to("Delete my account", user_path(@user.id), method: "delete", data: {confirm: "Do you really want to quit this site when we know where you live and have axes?"})%>
+  </div>
+<% else %>
+  <div class = "panel col-md-6 col-xs-12">
+    <h3>Complete Sign Up</h3>
+    <%= user_fields.submit "Sign Up", {class: "btn btn-swedish btn-block"} %>
+  </div>
+
+<% end %>
+
+
 
 <% end %>
