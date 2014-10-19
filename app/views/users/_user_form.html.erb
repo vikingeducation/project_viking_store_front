@@ -23,8 +23,15 @@ Address
 
 	<%= user.label :phone, "Tel Number (optional)" %>
 	<%= user.text_field :phone %>
+
+	<%= user.fields_for :addresses do |addresses_fields| %>
+		<%= addresses_fields.text_field :street_address %>
+		<%= addresses_fields.text_field :city %>
+		<%= addresses_fields.collection_select (:state  1 2) %>
+		<%= addresses_fields.text_field :zip %>
+
 	<%= user.submit %>
 
 </div>
-
+	<% end %>
 <% end %>

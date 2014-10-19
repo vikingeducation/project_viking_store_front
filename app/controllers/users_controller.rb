@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def new
     @user=User.new
+    @states_list = get_states
   end
 
   def show
