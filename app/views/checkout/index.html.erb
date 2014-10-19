@@ -1,0 +1,54 @@
+<h3>Checkout</h3>
+
+<%= form_for @user do |f| %>
+
+  <div class="row">
+    <%= f.label :default_shipping_address_id, "Shipping Address" %>
+    <%= f.collection_select( :default_shipping_address_id, @addresses, :id, :street_address) %>
+
+    <%= f.label :default_billing_address_id, "Billing Address" %>
+    <%= f.collection_select( :default_billing_address_id, @addresses, :id, :street_address) %>
+    <%= link_to "Edit Saved Addresses", admin_user_addresses_path(@user.id) %>
+  </div>
+
+  <% if f.object.payment %>
+    <% @type = f.object.payment %>
+  <% else %>
+    <% @type = Payment.new %>
+  <% end %>
+
+    <%= f.fields_for :payment, @type do |payment_param| %>
+      
+      <%= payment_param.label :cc_number, "Credit Card Number" %>
+      <%= payment_param.text_field :cc_number, value: user_cc %>
+      <%= payment_param.label :exp_month, "Expiring Month (2-digit)" %>
+      <%= payment_param.text_field :exp_month, value: user_exp_month %>
+      <%= payment_param.label :exp_year, "Expiring Year (4-digit)" %>
+      <%= payment_param.text_field :exp_year, value: user_exp_year %>
+      <%= payment_param.label :ccv, "CCV" %>
+      <%= payment_param.text_field :ccv, value: user_ccv %>
+    <% end %>
+
+  <% if f.object.payment %>
+    <%= link_to "Delete Card", @user.payment, method: delete, data: {confirm: "Are you sure?"} %>
+  <% end %>
+
+  <h3>Review and Complete</h3>
+
+  <table>
+    <thead>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </thead> 
+    <%= OrderContent.where(order_id: (@user.orders.find_by(is_placed: false).id)).each do |cart| %>
+    <tr>
+      <td><%= Product.find(cart.id).title %></td>
+      <td><%= cart.quantity %></td>
+      <td><%= cart.current_price %></td>
+      <td><%= OrderContent.where(order_id: (@user.orders.find_by(is_placed: false).id)).sum("quantity * current_price") %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

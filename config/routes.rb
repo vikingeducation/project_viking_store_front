@@ -21,6 +21,10 @@ root 'admin#index'
   end
   resources :users
 
+  resources :payments
+  
+  resources :checkout
+
   resources :products
   get '/cart' => 'order_contents#index'
   resources :sessions, :only => [:new, :create, :destroy]

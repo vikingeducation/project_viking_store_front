@@ -3,11 +3,19 @@ class User < ActiveRecord::Base
   has_many :addresses, :dependent => :nullify
   has_many :orders
 
+
+
+  has_one :payment, :dependent => :destroy # CC info
+
+
   accepts_nested_attributes_for :addresses,
                                 :reject_if => :all_blank,
                                 :allow_destroy => true;
+  
+  accepts_nested_attributes_for :payment,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true;
 
-  has_one :payment, :dependent => :destroy # CC info
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
