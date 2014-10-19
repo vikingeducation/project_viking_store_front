@@ -1,15 +1,40 @@
 <h1>Check out</h1>
 
 <%= form_for @order do |order_fields| %>
-  <div class="panel">
+  <div class="panel col-xs-12 col-sm-6">
     <h2>Shipping + Billing</h2>
+
+    <div class="form-group">
+      <%= order_fields.label :shipping_address %>
+      <%= order_fields.collection_select :shipping_id, @order.user.addresses, :id, :street_address, {default: @order.user.shipping.id}, {class: "form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= order_fields.label :billing %>
+      <%= order_fields.collection_select :billing_id, @order.user.addresses, :id, :street_address, {default: @order.user.billing.id}, {class: "form-control"} %><br>
+      <%= link_to("Edit Saved Addresses", "#") %>
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+      <%= order_fields.label :credit_card_number %>
+      <%= text_field_tag :credit_card_number, "#", class: "col-xs-6 form-control" %>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-12">
+        <%= order_fields.label :expiration %>
+        <%= text_field_tag :exp, "#",class: "form-control"%>
+        <br>
+        <%= order_fields.label :ccv %>
+        <%= text_field_tag :ccv, "#",class: "form-control"%>
+      </div>
+    </div>
   </div>
 
-  <div class="panel">
+  <div class="panel col-xs-12 col-sm-6">
     <h2>Review + Complete</h2>
 
-    <div>
-      <table class="table">
+    <div class="col-xs-12">
+      <table class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>Product</th>
@@ -22,6 +47,18 @@
           <%= render 'order', :purchases => @order.purchases %>
         </tbody>
       </table>
+
+      <div class="col-xs-6">
+        <%= link_to("Edit Order",  ) %>
+        <%= link_to("Delete Order", ) %>
+      </div>
+
+      <div class="col-xs-6">
+        <p>Shipping: <%= number_to_currency(12) %></p> <!-- @shipping -->
+        <p>Tax: <%= number_to_currency(12) %></p> <!-- @tax -->
+        <h4>Total: <%=  %></h4>  <!-- @total -->
+      </div>
+
     </div>
 
     <div class="order-total">
@@ -29,8 +66,9 @@
 
   </div>
 
-  <div class="panel">
+  <div class="panel col-xs-12 col-sm-6 pull-right">
     <h2>Place Order</h2>
+    <%= order_fields.submit class: "btn btn-block btn-swedish" %>
   </div>
 
 <% end %>

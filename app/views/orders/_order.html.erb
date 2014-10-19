@@ -2,7 +2,7 @@
   <tr>
     <td><%= purchase.product.name %></td>
     <td><%= purchase.quantity %></td>
-    <td><%= purchase.product.price %></td>
-    <td><%= purchase.value %></td>
+    <td><%= number_to_currency(purchase.product.price) %></td>
+    <td><%= number_to_currency(purchase.value) %></td>
   </tr>
 <% end %>
