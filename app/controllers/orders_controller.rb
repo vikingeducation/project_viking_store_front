@@ -35,8 +35,9 @@ class OrdersController < ApplicationController
 
 	def update
 		@order = Order.find(params[:id])
+    @order.build_credit_card(whitelisted_credit_card)
 
-		if @order.update(checkout_params)
+		if @order.credit_card.save && @order.update(checkout_params) && (@order.billing && @order.shipping && @order.credit_card)
 			flash[:success] = "You just bought some axes!"
 			@order.checked_out = true
 			@order.checkout_date = Time.now
@@ -70,11 +71,12 @@ class OrdersController < ApplicationController
   	params.require(:order).permit(:id,
   																:shipping_id,
   																:billing_id,
-  																{:credit_card_attributes => [:id,
-													  																	 :card_number,
-													  																	 :exp_month,
-													  																	 :exp_year,
-													  																	 :ccv]})
+  																)
+  end
+
+  def whitelisted_credit_card
+    params[:credit_card][:user_id] = current_user.id
+    params.require(:credit_card).permit(:id, :card_number, :exp_month, :exp_year, :ccv, :user_id)
   end
 
 end

@@ -1,5 +1,8 @@
 <h1>Check out</h1>
 
+<%= render "shared/errors", :object => @order %>
+<%= render "shared/errors", :object => @order.credit_card %>
+
 <%= form_for @order do |order_fields| %>
   <div class="panel col-xs-12 col-sm-6">
     <h2>Shipping + Billing</h2>

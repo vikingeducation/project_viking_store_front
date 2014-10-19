@@ -16,8 +16,6 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :purchases, :reject_if => :all_blank,
                                             :allow_destroy => true
-  accepts_nested_attributes_for :credit_card, :reject_if => :all_blank,
-                                            :allow_destroy => true
 
   before_save :cart_check
 
