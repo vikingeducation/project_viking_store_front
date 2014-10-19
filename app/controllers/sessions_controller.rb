@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params['session'][:email])
     if user
       sign_in(user)
+      session[:first_access] = true
       flash[:success] = "Signed in!"
       redirect_to products_path
     else

@@ -1,0 +1,20 @@
+  <% if f.object.payment %>
+    <% @type = f.object.payment %>
+  <% else %>
+    <% @type = Payment.new %>
+  <% end %>
+
+  <%= f.fields_for :payment, @type do |payment_param| %>
+    
+    <%= payment_param.label :cc_number, "Credit Card Number" %>
+    <%= payment_param.text_field :cc_number, value: user_cc %>
+    <%= payment_param.label :exp_month, "Expiring Month (2-digit)" %>
+    <%= payment_param.text_field :exp_month, value: user_exp_month %>
+    <%= payment_param.label :exp_year, "Expiring Year (4-digit)" %>
+    <%= payment_param.text_field :exp_year, value: user_exp_year %>
+    <%= payment_param.label :ccv, "CCV" %>
+    <%= payment_param.text_field :ccv, value: user_ccv %>
+  <% end %>
+    <% if f.object.payment %>
+    <%= link_to "Delete Card", @user.payment, method: delete, data: {confirm: "Are you sure?"} %>
+  <% end %>
