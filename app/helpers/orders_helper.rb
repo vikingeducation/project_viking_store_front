@@ -14,4 +14,10 @@ module OrdersHelper
   def order_title(order)
     order.checked_out ? "Order #{order.id}" : "#{order.user.name}'s Cart"
   end
+
+  def delete_credit_card(credit_card)
+    if credit_card.persisted?
+      link_to "Delete Card", credit_card_path(credit_card.id), method: 'delete'
+    end
+  end
 end

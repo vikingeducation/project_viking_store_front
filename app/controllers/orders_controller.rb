@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
 
 		session[:cart].each do |k, v|
 			@order.purchases.build(product_id: k,
-									 quantity: v)
+									 					 quantity: v)
 		end
 
     if current_user.credit_card
@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
 
 	def edit
 		@order = current_user.cart.first # let's see what we can pass
+		@order.build_credit_card(user_id: @order.user.id) unless @order.credit_card
 	end
 
 	def update

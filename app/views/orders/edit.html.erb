@@ -30,6 +30,7 @@
         <%= credit_fields.label :ccv, "CCV" %>
         <%= credit_fields.text_field :ccv, class: "form-control"%>
         <p><em>Be sure to input your CCV so you can complete this order.</em></p>
+        <%= delete_credit_card(@order.credit_card) %>
       </div>
     </div>
     <% end %>
