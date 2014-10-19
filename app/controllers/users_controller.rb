@@ -37,6 +37,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    session[:return_to] ||= request.referer
+    if @user.destroy && sign_out
+      flash[:success] = "user deleted successfully."
+      redirect_to products_path
+    else
+      flash[:error] = "Failed to delete User."
+      render 'edit'
+    end
   end
 
   private

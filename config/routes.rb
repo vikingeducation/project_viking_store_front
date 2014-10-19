@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :edit, :update, :destroy]
+  resources :orders, only: [:edit, :update, :destroy]
 
   namespace :admin do
     root 'dashboard#index'

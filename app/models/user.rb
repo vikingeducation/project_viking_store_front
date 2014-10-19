@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   belongs_to :billing, :class_name => "Address" # should be cleared if that address is deleted
   belongs_to :shipping, :class_name => "Address" # should be cleared if that address is deleted
 
-  has_many :addresses, :dependent => :destroy
+  has_many :addresses, :dependent => :nullify
   has_many :orders # should only delete carts
   has_many :products, through: :orders
   has_one :credit_card, :dependent => :destroy
