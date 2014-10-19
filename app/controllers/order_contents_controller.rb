@@ -19,12 +19,11 @@ class OrderContentsController < ApplicationController
   def get_user_cart
     if current_user && first_access?
       session.delete(:first_access)
-      cart = OrderContent.where(order_id: Order.where("is_placed=?",false).find_by(user_id: current_user.id))
-      if cart
-        cart.each do |cart|
-          product_name = Product.find(cart.product_id).title
-          product_id = cart.product_id.to_s
-          session[:cart][product_id] = cart.quantity
+      cart_items = OrderContent.where(order_id: Order.where("is_placed=?",false).find_by(user_id: current_user.id))
+      if cart_items
+        cart_items.each do |cart_item|
+          product_id = cart_item.product_id.to_s
+          session[:cart][product_id] = cart_item.quantity 
         end
         session[:cart]
       else

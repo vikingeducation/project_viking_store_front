@@ -7,6 +7,10 @@ class Order < ActiveRecord::Base
 
   before_save :add_timestamp
 
+  accepts_nested_attributes_for :user,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true;
+
 	def self.orders(time)
 		Order.where('is_placed = ? AND placed_at > ?',true,time).count
 	end

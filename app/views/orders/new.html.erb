@@ -1,0 +1,23 @@
+<h3>Checkout</h3>
+<div class="row">
+  <%= form_for @order do |order_fields| %> 
+
+    
+    <div class="col-xs-6">
+        <h3>Shipping and Billing</h3>
+        <%= render :partial => "address", :locals=>{:f=>order_fields} %>
+
+        <h3>Payment Info</h3>
+        <%= render :partial => "creditcard", :locals=>{:f=>order_fields} %>
+    </div>
+
+    <div class="col-xs-6">
+        <h3>Review and Complete</h3>
+        <%= render :partial => "cart", :locals=>{:f=>order_fields} %>
+    
+         <h3>Place Your Order</h3>
+         <%= order_fields.submit "Place Order!" %>
+    </div>
+
+  <% end %>
+</div>

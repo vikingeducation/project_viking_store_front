@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
       product = params[:product]
       if Product.where("id = ?", product).present?
         if session[:cart][product]
-          session[:cart][product] += 1
+          session[:cart][product] = session[:cart][product].to_i + 1
         else
           session[:cart][product] = 1
         end

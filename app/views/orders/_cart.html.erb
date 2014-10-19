@@ -1,0 +1,22 @@
+  <table>
+    <thead>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </thead> 
+
+    <% @cartitems.each do |product,pq_array| %>
+      <tr>
+      <td><%= product %></td>
+      <td><%= pq_array[1] %></td>
+      <td><%= pq_array[0] %><td>
+      <td><%= pq_array.reduce(&:*) %></td> 
+      </tr>
+
+    <% end %>
+  </table>
+
+  <p><strong>Total: <%= @cart_total %></strong></p>
+  <p><%= link_to "Edit Order", cart_path %></p>
+  <p><%= link_to "Delete Order", clearcart_path %></p>

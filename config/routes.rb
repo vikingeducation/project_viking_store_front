@@ -20,10 +20,9 @@ root 'admin#index'
       end
   end
   resources :users
+  resources :orders
 
   resources :payments
-  
-  resources :checkout
 
   resources :products
   get '/cart' => 'order_contents#index'
@@ -33,6 +32,8 @@ root 'admin#index'
   get '/signin' => 'sessions#new'
   get '/signup' => 'users#new'
   match '/signout', to: 'sessions#destroy', via: 'delete'
+
+  match '/clearcart', to: 'orders#clearcart', via: 'get'
 
 
   get 'admin/addresses/params[:user_id]' => 'admin/addresses#index'
