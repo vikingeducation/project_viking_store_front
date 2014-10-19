@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def new
     @user=User.new
-    @states_list = get_states
   end
 
   def show
@@ -21,10 +20,17 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name,
+    params.require(:user)
+    .permit(:first_name, :last_name,
          :email, :phone, :default_billing_address_id,
-         :default_shipping_address_id, :email_confirmation)
+         :default_shipping_address_id, :email_confirmation,
+         :addresses_attributes => [
+          :state,
+          :street_address,
+          :city,
+          :zip,
+          :id
+         ])
   end
-
 
 end
