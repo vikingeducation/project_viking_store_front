@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+
+
   def index
     filter = params[:products_filter]
     @products = filter.present? ? Product.where("category_id = ?", filter) : Product.all
@@ -26,8 +28,10 @@ class ProductsController < ApplicationController
   def edit
     @cart = session[:cart]
     @total = 0
-    @cart.each do |product_id, quantity|
-      @total += Product.find(product_id).price * quantity
+    if @cart
+      @cart.each do |product_id, quantity|
+        @total += Product.find(product_id).price * quantity
+      end
     end
   end
 
@@ -50,4 +54,7 @@ class ProductsController < ApplicationController
     flash[:success] = "Updated your order quantities."
     render :edit
   end
+
+
+
 end
