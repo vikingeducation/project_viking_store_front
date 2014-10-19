@@ -52,6 +52,7 @@ class OrdersController < ApplicationController
 	private
 
   def verify_cart
+  	session[:cart] ||= {}
     if session[:cart].empty?
       flash[:error] = "Empty cart! Do more shopping first."
       redirect_to root_path
