@@ -25,13 +25,17 @@ class ProductsController < ApplicationController
 
   def edit
     @cart = session[:cart]
+    @total = 0
+    @cart.each do |product_id, quantity|
+      @total += Product.find(product_id).price * quantity
+    end
   end
 
   def update
     @cart = session[:cart]
 
     params[:order].each do |product_id, quantity|
-      session[:cart][product_id] = quantity
+      session[:cart][product_id] = quantity.to_i
       session[:cart].delete(product_id) if quantity == ("0" || "")
     end
 

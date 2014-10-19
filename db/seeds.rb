@@ -29,7 +29,7 @@ end
   p[:price]       = Faker::Commerce.price
   p.save
 end
- 
+
 #generate addresses, SCALAR*111 cities
 states =
 ["Alabama", "Alaska", "Arizona", "Arkansas", "California",
@@ -99,7 +99,7 @@ def generate_addresses(user_id)
     a.save
   end
 end
- 
+
 #generate users, SCALAR**2 users
 def creation_date
   time_frames = []

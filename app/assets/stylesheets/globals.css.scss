@@ -46,3 +46,8 @@ button.btn-swedish, input.btn-swedish, a.btn-swedish {
     border-color: red;
   }
 }
+
+.panel {
+  border: 1px solid $flag-dark-blue;
+  padding:20px;
+}
