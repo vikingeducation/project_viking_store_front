@@ -31,6 +31,8 @@ namespace :db do
     make_order
     make_order_contents
 
+    make_states
+
 
   end
 end
@@ -251,5 +253,19 @@ def make_order
     Order.create!(user_id: user_id, billing_address_id: billing,
       shipping_address_id: shipping, is_placed: false, placed_at: placed_at)
   end
+
+end
+
+def make_states
+@states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA',
+      'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+      'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+      'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI',
+      'SC','SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+@states.each do |i|
+  j=State.new
+  j.name = i
+  j.save
+end
 
 end
