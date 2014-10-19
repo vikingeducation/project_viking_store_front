@@ -63,9 +63,9 @@
       </div>
 
       <div class="col-xs-6">
-        <p>Shipping: <%= number_to_currency(12) %></p> <!-- @shipping -->
-        <p>Tax: <%= number_to_currency(12) %></p> <!-- @tax -->
-        <h4>Total: <%=  %></h4>  <!-- @total -->
+        <p>Shipping: <%= number_to_currency(@total * 0.1) %></p> <!-- @shipping -->
+        <p>Tax: <%= number_to_currency(@total * 0.1) %></p> <!-- @tax -->
+        <h4>Total: <%= number_to_currency(@total * 1.2) %></h4>  <!-- @total -->
       </div>
 
     </div>

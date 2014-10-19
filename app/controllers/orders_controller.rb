@@ -31,6 +31,11 @@ class OrdersController < ApplicationController
 	def edit
 		@order = current_user.cart.first # let's see what we can pass
 		@order.build_credit_card(user_id: @order.user.id) unless @order.credit_card
+
+    @total = 0
+    @order.purchases.each do |purchase|
+      @total += (purchase.product.price * purchase.quantity)
+    end
 	end
 
 	def update
