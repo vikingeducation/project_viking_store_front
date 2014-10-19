@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 
 		if current_user.cart.present?
 			@order = current_user.cart.first
+			@order.purchases.destroy
 		else
 			@order = Order.new
 		end
