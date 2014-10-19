@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
 	end
 
 	private
-	def merge_cart
+	def load_cart
 		if current_user && current_user.cart.present?
 			# Merge the cart and the session cart
 			@cart = current_user.cart.first

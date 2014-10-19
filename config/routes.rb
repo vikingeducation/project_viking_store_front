@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'products#index'
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show, :edit, :update]
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :edit, :update, :destroy]
   resources :orders, only: [:edit, :update, :destroy]

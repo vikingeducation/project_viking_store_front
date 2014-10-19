@@ -21,4 +21,12 @@ class ProductsController < ApplicationController
 
   def show
   end
+
+
+  def edit
+    @cart = session[:cart]
+  end
+
+  def update
+  end
 end
