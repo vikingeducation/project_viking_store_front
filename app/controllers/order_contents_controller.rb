@@ -3,6 +3,17 @@ class OrderContentsController < ApplicationController
   @cart = get_user_cart
   end
 
+  def update_cart #this allows a user to modify cart quantities
+    params.each do |i|
+      i=i[0]
+      if i.include?('quantity')
+        j = i.gsub(/quantity/,"")
+        session[:cart][j]=params[i]
+      end
+    end
+    redirect_to cart_path
+  end
+
 
   private 
   def get_user_cart

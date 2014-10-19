@@ -27,6 +27,7 @@ root 'admin#index'
 
   resources :products
   get '/cart' => 'order_contents#index'
+  match '/cart', to: 'order_contents#update_cart', via: 'post'
   resources :sessions, :only => [:new, :create, :destroy]
 
   get '/signin' => 'sessions#new'

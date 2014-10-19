@@ -1,9 +1,37 @@
-<h2>Shopping Cart Contents</h2>
+<div class="row">
+	<h2>Shopping Cart Contents</h2>
 
-<% if @cart %>
-	<% @cart.each do |item,quantity| %>
-	<p>Product ID: <%= item %></p>
-	<p>Quantity: <%= quantity %></p>
+	<% if @cart %>
+		<%= form_tag('/cart') do |x| %>
+
+			<% @cart.each do |item,quantity| %>
+
+				<div class="col-xs-6 col-xs-offset-2">
+					<h4><%= Product.find(item).title %></h4>
+					<p><em><%= Product.find(item).category.name %></em></p>
+					<p><%= Product.find(item).price %></p>
+				</div>
+				<div class="col-xs-4">
+					<div class="row">
+						<div class="col-xs-6">
+							<p>Quantity</p>
+						</div>
+						<div class="col-xs-6">
+							<p>Total Price</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<p><%= text_field_tag("#{:quantity}#{item}", quantity) %></p>
+						</div>
+						<div class="col-xs-6">
+							<p><%= get_total_price(@cart)%></p>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		<%= submit_tag("update quantity")%>
+		<% end %>
+
 	<% end %>
-
-<% end %>
+</div>
