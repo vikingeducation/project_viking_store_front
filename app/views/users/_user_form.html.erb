@@ -2,7 +2,8 @@
 	<%= render 'shared/error_messages', object: user.object %>
 
 <div class="col-xs-6">
-	<h3>Saved Address 1 (Optional)</h3>
+	<% (1..2).each do |i| %>
+		<h3>Saved Address <%= i %> (Optional)</h3>
 		<%= user.fields_for :addresses, Address.new do |address| %>
 			<%= address.label :street_address %>
 			<%= address.text_field :street_address %>
@@ -17,10 +18,11 @@
 			<%= address.text_field :zip %>
 
 			<div class="address-checkbox">
-					<%= user.check_box(:default_billing_address_id) %>
+
+					<%= user.radio_button(:default_billing_address_id, address.index) %>
 		 			<%= user.label :default_billing_address_id, "Set as Default Billing"  %>
 
-		 			<%= user.check_box(:default_shipping_address_id) %>
+		 			<%= user.radio_button(:default_shipping_address_id, address.index) %>
 		 			<%= user.label :default_shipping_address_id, "Set as Default Shipping"  %>
 
 				<% if address.object.persisted? %>
@@ -30,33 +32,8 @@
 			</div>			
 		<% end %>
 
-	<h3>Saved Address 2 (Optional)</h3>
-		<%= user.fields_for :addresses, Address.new do |address| %>
-			<%= address.label :street_address %>
-			<%= address.text_field :street_address %>
-
-			<%= address.label :city %>
-			<%= address.text_field :city %>
-
-			<%= address.label :state %>
-			<%= address.collection_select(:state, State.all, :name, :name, :include_blank => true) %>
-			
-			<%= address.label :zip %>
-			<%= address.text_field :zip %>
-
-			<div class="address-checkbox">
-					<%= user.check_box(:default_billing_address_id) %>
-		 			<%= user.label :default_billing_address_id, "Set as Default Billing"  %>
-
-		 			<%= user.check_box(:default_shipping_address_id) %>
-		 			<%= user.label :default_shipping_address_id, "Set as Default Shipping"  %>
-
-				<% if address.object.persisted? %>
-					<%= address.check_box :_destroy%>
-		 			<%= address.label :delete %>
-		 		<% end %>
-			</div>			
-		<% end %>
+	<% end %>
+		
 </div>
 
 <div class="col-xs-6">

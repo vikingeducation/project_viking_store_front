@@ -17,10 +17,10 @@
       <%= address.text_field :zip %>
 
       <div class="address-checkbox">
-          <%= user.check_box(:default_billing_address_id) %>
+          <%= user.radio_button(:default_billing_address_id, address.index) %>
           <%= user.label :default_billing_address_id, "Set as Default Billing"  %>
 
-          <%= user.check_box(:default_shipping_address_id) %>
+          <%= user.radio_button(:default_shipping_address_id, address.index) %>
           <%= user.label :default_shipping_address_id, "Set as Default Shipping"  %>
 
         <% if address.object.persisted? %>

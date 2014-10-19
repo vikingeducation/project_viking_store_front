@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_many :addresses, :dependent => :destroy
+  has_many :addresses, :dependent => :nullify
   has_many :orders
 
   accepts_nested_attributes_for :addresses,
