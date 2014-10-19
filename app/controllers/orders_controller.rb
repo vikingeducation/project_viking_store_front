@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
 		if current_user.cart.present?
 			@order = current_user.cart.first
-			@order.purchases.destroy
+			@order.purchases.destroy_all
 		else
 			@order = current_user.orders.build(checked_out: false)
 		end
@@ -19,6 +19,11 @@ class OrdersController < ApplicationController
 			@order.purchases.build(product_id: k,
 									 quantity: v)
 		end
+
+    if current_user.credit_card
+      @order.credit_card = current_user.credit_card
+    end
+
 		@order.save!
 		redirect_to edit_order_path(@order)
 	end

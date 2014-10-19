@@ -1,6 +1,6 @@
 <h1>Shopping Cart Contents</h1>
 
-<%= form_tag product_path, {:method => "PUT"} do %>
+<%= form_tag cart_path, {:method => "PUT"} do %>
   <div class ="panel">
 
     <% @cart.each do |product_id, quantity| %>
@@ -51,7 +51,8 @@
           <%= submit_tag "Update Cart", class: "btn btn-block btn-default" %>
         </div><br>
         <div class="check-out">
-          <%= link_to "Check Out", '/orders', method: 'post', class: "btn btn-block btn-swedish" %><br><br>
+          <%= link_to "Check Out", '/orders', method: 'post', class: "btn btn-block btn-swedish" %><br>
+          <p><em>Make sure to click "Update Cart" on any changes before checking out!</em></p>
         </div>
       </div>
     </div>

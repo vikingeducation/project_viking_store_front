@@ -16,10 +16,10 @@
   </div>
   <footer class="row">
     <div class="col-md-12">
-      <form action="<%= products_path %>" method="GET">
+      <%= form_tag carts_path(0), method: "POST" do %>
         <%= hidden_field_tag(:item, product.id) %>
-        <p><button type="submit" class="btn btn-swedish btn-submit">Add to Cart</button></p>
-      </form>
+        <p><%=submit_tag "Add to Cart", class: "btn btn-swedish btn-submit" %></p>
+      <% end %>
     </div>
   </footer>
 </article>
