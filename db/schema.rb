@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020054603) do
+ActiveRecord::Schema.define(version: 20141020055545) do
 
   create_table "addresses", force: true do |t|
     t.integer  "user_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20141020054603) do
 
   create_table "payments", force: true do |t|
     t.integer  "user_id"
-    t.integer  "cc_number"
+    t.string   "cc_number"
     t.integer  "exp_month"
     t.integer  "exp_year"
     t.integer  "ccv"

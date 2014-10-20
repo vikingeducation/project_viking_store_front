@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   def index
+
     @products = params[:category_id].blank? ? Product.paginate(page: params[:page], :per_page => 12) : Product.where("category_id = ?", params[:category_id]).paginate(page: params[:page],:per_page => 100)
     @categories = Category.all.map { |i| [i.name, i.id]}
     
