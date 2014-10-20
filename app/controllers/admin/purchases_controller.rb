@@ -17,7 +17,7 @@ class Admin::PurchasesController < AdminController
       flash.now[:error] = "Order contents failed to update."
       render :index # not sure about this one
     end
-	end
+  end
 
   def destroy
   end
@@ -28,7 +28,4 @@ class Admin::PurchasesController < AdminController
     params.require(:purchases)
   end
 
-  def whitelisted_purchase_params
-    params.require(:purchases).permit(:product_id => [], :quantity)
-  end
 end
