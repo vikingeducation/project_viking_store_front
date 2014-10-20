@@ -1,22 +1,30 @@
+<div class="row checkout-cart">
   <table>
     <thead>
       <th>Product</th>
+      <td></td>
       <th>Quantity</th>
+      <td></td>
       <th>Price</th>
+      <td></td>
       <th>Total</th>
     </thead> 
 
     <% @cartitems.each do |product,pq_array| %>
       <tr>
-      <td><%= product %></td>
-      <td><%= pq_array[1] %></td>
+      <td><p><strong><%= product %> </strong></p></td>
+      <td></td>
+      <td><%= pq_array[1].to_i %></td>
+      <td></td>
       <td><%= pq_array[0] %><td>
-      <td><%= pq_array.reduce(&:*) %></td> 
+      <td></td>
+      <td><%= number_to_currency(pq_array.reduce(&:*)) %></td> 
       </tr>
 
     <% end %>
   </table>
 
-  <p><strong>Total: <%= @cart_total %></strong></p>
+  <p><strong>Total: <%= number_to_currency(@cart_total) %></strong></p>
   <p><%= link_to "Edit Order", cart_path %></p>
   <p><%= link_to "Delete Order", clearcart_path %></p>
+</div>

@@ -1,5 +1,5 @@
-<h3>Checkout</h3>
-<div class="row">
+<div class="row checkout-row">
+<h2>Checkout</h2>
   <%= form_for @order do |order_fields| %> 
 
     
@@ -15,8 +15,7 @@
         <h3>Review and Complete</h3>
         <%= render :partial => "cart", :locals=>{:f=>order_fields} %>
     
-         <h3>Place Your Order</h3>
-         <%= order_fields.submit "Place Order!" %>
+         <%= order_fields.submit("Place Order!", :class => "btn btn-block btn-success") %>
     </div>
 
   <% end %>

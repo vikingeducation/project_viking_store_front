@@ -159,10 +159,28 @@ body {
 /* cart page */
 .cart-row {
 	margin-bottom:15px;
+
 	h2 {
 		text-align:center;
 	} img {
 		width:100%;
+	}
+}
+
+.cart-item {
+	border-bottom: 1px solid;
+	margin-bottom:15px;
+}
+
+/* checkout page */
+.checkout-row {
+	h2 {
+		text-align:center;
+	}
+}
+.checkout-cart {
+	table tr td:empty {
+		width:5%;
 	}
 }
 
