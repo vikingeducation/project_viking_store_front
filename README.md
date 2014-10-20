@@ -10,4 +10,4 @@ Project by (Peter DePaulo | github: [pndpo](https://github.com/pndpo)) and (Andu
 
 Part of Weeks 4, 5 and 6 of [Viking Code School](http://www.vikingcodeschool.com).
 
-Live at: http://vikingstoreadmin.herokuapp.com/
+Live at: [http://vikingstorefront.herokuapp.com/](http://vikingstorefront.herokuapp.com/)
