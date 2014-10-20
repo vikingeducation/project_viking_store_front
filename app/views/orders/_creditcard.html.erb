@@ -1,0 +1,13 @@
+    <% if @payment %>
+    <p>Credit Card Number<p>
+
+      <p><%= @payment.cc_number %></p>
+      <p>Expiration Month</p>
+      <p><%= @payment.exp_month %></p>
+      <p>Expiration Year</p>
+      <p><%= @payment.exp_year %></p>
+      <p>CCV</p>
+      <p><%= @payment.ccv %></p>
+
+    <%= link_to "Delete Card", @payment, method: :delete, data: {confirm: "Are you sure?"} %>
+  <% end %>

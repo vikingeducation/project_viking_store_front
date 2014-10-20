@@ -1,0 +1,24 @@
+<h3>Checkout</h3>
+<div class="row">
+<%= form_for @user do |f| %>
+
+    <div class="col-xs-6">
+    <h3>Shipping and Billing</h3>
+    <%= render :partial => "address", :locals=>{:f=>f} %>
+    <h3>Payment Info</h3>
+     <%= render :partial => "creditcard", :locals=>{:f=>f} %>
+    </div>
+
+    <div class="col-xs-6">    
+      <h3>Review and Complete</h3>
+      <%= render :partial => "cart", :locals=>{:f=>f} %>
+    </div>
+  
+
+
+
+
+
+
+<% end %>
+</div>

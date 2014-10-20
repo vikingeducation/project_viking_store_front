@@ -1,0 +1,56 @@
+<%= form_for(@user) do |user| %>  
+  <%= render 'shared/error_messages', object: user.object %>
+
+<div class="col-xs-6">
+    <%= user.fields_for :addresses, user.object.addresses do |address| %>
+  <h3>Saved Address</h3>
+      <%= address.label :street_address %>
+      <%= address.text_field :street_address %>
+
+      <%= address.label :city %>
+      <%= address.text_field :city %>
+
+      <%= address.label :state %>
+      <%= address.collection_select(:state, State.all, :name, :name, :include_blank => true) %>
+      
+      <%= address.label :zip %>
+      <%= address.text_field :zip %>
+
+      <div class="address-checkbox">
+          <%= user.radio_button(:default_billing_address_id, address.index) %>
+          <%= user.label :default_billing_address_id, "Set as Default Billing"  %>
+
+          <%= user.radio_button(:default_shipping_address_id, address.index) %>
+          <%= user.label :default_shipping_address_id, "Set as Default Shipping"  %>
+
+        <% if address.object.persisted? %>
+          <%= address.check_box :_destroy%>
+          <%= address.label :delete %>
+        <% end %>
+      </div>      
+    <% end %>
+</div>
+
+<div class="col-xs-6">
+  <h3>Account Information</h3>
+  <%= user.label :email, "Email Address" %>
+  <%= user.text_field :email  %>
+
+  <%= user.label :email_confirmation, "Email Confirm" %>
+  <%= user.text_field :email_confirmation %>
+
+
+  <%= user.label :first_name, "First Name" %>
+  <%= user.text_field :first_name %>
+
+  <%= user.label :last_name, "Last Name" %>
+  <%= user.text_field :last_name %>
+
+
+  <%= user.label :phone, "Tel Number (optional)" %>
+  <%= user.text_field :phone %>
+  <%= user.submit "Complete Signup" %>
+
+  <% end %>
+
+</div>

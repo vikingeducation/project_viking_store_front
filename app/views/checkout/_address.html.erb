@@ -1,0 +1,6 @@
+<%= f.label :default_shipping_address_id, "Shipping Address" %>
+<%= f.collection_select( :default_shipping_address_id, @addresses, :id, :street_address) %>
+
+<%= f.label :default_billing_address_id, "Billing Address" %>
+<%= f.collection_select( :default_billing_address_id, @addresses, :id, :street_address) %>
+<%= link_to "Edit Saved Addresses", edit_user_path(@user.id) %>

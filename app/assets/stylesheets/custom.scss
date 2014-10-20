@@ -1,0 +1,63 @@
+@import "bootstrap";
+.navbar {
+	background-color:#3B5998;
+	#logo {
+		color:#eee;
+	} a, a:hover {
+		color:#fff;
+	}
+}
+
+
+.navbar-toggle .icon-bar { /* custom collapsed nav dropdown button (changed color scheme a bit */
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #cccccc;
+  border-radius: 1px;
+}
+
+header {
+	.navInput{
+		float:right;
+		padding-left:5px;
+		padding-right:5px;
+	} 
+} 
+
+navbar-collapse {
+	input {
+		margin-top: 10px;
+	}
+	padding-bottom:3px;
+}
+
+body {
+  padding-top: 70px; /*necessary to compensate for nav bar */
+  margin-bottom:20px;
+  background-color:#edf0f5 !important;
+}
+
+/*jumbotron styling */
+
+.jumbotron {
+	background-color:#fff;
+	h1 {
+		text-align:center;
+	} .jumbotron-lower {
+		text-align:center;
+		background-color:#000;
+		color:#fff;
+	}
+}
+
+.footer {
+	text-align:center;
+	background-color:#ff9b9b;
+}
+
+
+
+
+
+

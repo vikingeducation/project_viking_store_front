@@ -1,0 +1,20 @@
+  <table>
+    <thead>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </thead> 
+
+    <% OrderContent.where(order_id: (@user.orders.find_by(is_placed: false).id)).each do |cart| %>
+      <tr>
+        <td><%= Product.find(cart.product_id).title %></td>
+        <td><%= cart.quantity %></td>
+        <td><%= cart.current_price %></td>
+        <td><%= cart.current_price * cart.quantity %></td>
+      </tr>
+    <% end %>
+
+  </table>
+  <p><%= link_to "Edit Order", cart_path %></p>
+  <p><%= link_to "Delete Order", '/' %></p>
