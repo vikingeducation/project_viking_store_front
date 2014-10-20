@@ -33,7 +33,7 @@ navbar-collapse {
 }
 
 body {
-  padding-top: 70px; /*necessary to compensate for nav bar */
+  padding-top: 51px; /*necessary to compensate for nav bar */
   margin-bottom:20px;
   background-color:#edf0f5 !important;
 }
@@ -41,7 +41,12 @@ body {
 /*jumbotron styling */
 
 .jumbotron {
-	background-color:#fff;
+	background-color:#fff!important;
+	background: url("banner.jpg") no-repeat center center; 
+	background-size: 100% 100%;
+	margin:0!important;
+	height:200px;
+	width:100%;
 	h1 {
 		text-align:center;
 	} .jumbotron-lower {
@@ -135,6 +140,10 @@ body {
 		background-color:#88afff;
 		border:1px solid #29447E;
 	}
+}
+
+.product_header {
+	text-align:center;
 }
 
 
