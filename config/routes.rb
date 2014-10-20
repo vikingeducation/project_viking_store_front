@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-root 'admin#index'
+root 'products#index'
 
   resources :admin, only: [:index]
 

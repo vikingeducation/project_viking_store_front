@@ -9,5 +9,5 @@
       <p>CCV</p>
       <p><%= @payment.ccv %></p>
 
-    <%= link_to "Delete Card", @payment, method: delete, data: {confirm: "Are you sure?"} %>
+    <%= link_to "Delete Card", @payment, method: :delete, data: {confirm: "Are you sure?"} %>
   <% end %>
