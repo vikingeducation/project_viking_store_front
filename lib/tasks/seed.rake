@@ -123,7 +123,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.email
-    phone = Faker::Number.number(10)
+    phone = Faker::Number.number(10).to_s
     create = Faker::MakeDate.months_ago(6)
     a = User.create(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create)
@@ -135,7 +135,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.email
-    phone = Faker::Number.number(10)
+    phone = Faker::Number.number(10).to_s
     create = Faker::MakeDate.months_ago(5)
     a = User.create(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create)
@@ -147,7 +147,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.email
-    phone = Faker::Number.number(10)
+    phone = Faker::Number.number(10).to_s
     create = Faker::MakeDate.months_ago(4)
     a = User.create(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create)
@@ -159,7 +159,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.email
-    phone = Faker::Number.number(10)
+    phone = Faker::Number.number(10).to_s
     create = Faker::MakeDate.months_ago(3)
     a = User.create(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create)
@@ -171,7 +171,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.email
-    phone = Faker::Number.number(10)
+    phone = Faker::Number.number(10).to_s
     create = Faker::MakeDate.months_ago(2)
     a = User.create(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create)
@@ -183,7 +183,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.email
-    phone = Faker::Number.number(10)
+    phone = Faker::Number.number(10).to_s
     create = Faker::MakeDate.months_ago(1)
     a = User.create(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create)
