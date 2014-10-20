@@ -198,7 +198,7 @@ def make_payment
   (1..12).each {|i| months << i}
   (2014..2020).each {|i| years << i}
   (1..@users.length).each do |n|
-      cc = Faker::Number.number(16)
+      cc = Faker::Number.number(16).to_s
       exp_month = months.sample
       exp_year = years.sample
       ccv = rand(999)
