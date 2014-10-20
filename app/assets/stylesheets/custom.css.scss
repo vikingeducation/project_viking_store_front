@@ -1,10 +1,16 @@
 @import "bootstrap";
-.navbar {
+.navbar, .footer{
 	background-color:#3B5998;
 	#logo {
 		color:#eee;
 	} a, a:hover {
 		color:#fff;
+	} p {
+		color:#fff;
+		text-align:left;
+	} h4 {
+		color:#fff;
+		font-weight:normal;
 	}
 }
 
@@ -47,6 +53,7 @@ body {
 	margin:0!important;
 	height:200px;
 	width:100%;
+	border-bottom: 3px solid #3B5998;
 	h1 {
 		text-align:center;
 	} .jumbotron-lower {
@@ -58,7 +65,7 @@ body {
 
 .footer {
 	text-align:center;
-	background-color:#ff9b9b;
+	background-color:#3B5998;
 }
 
 
@@ -73,8 +80,10 @@ body {
 	} .pricetag {
 		position:absolute;
 		right:15px;
-		background-color:#FFE1A4;
+		background-color:#fff;
+		border:1px solid #eee;
 		color:#000;
+		font-size:1.5em;
 	} .priceheader {
 		background-color:#5B74A8;
 		margin-bottom:0	;
@@ -146,6 +155,16 @@ body {
 	text-align:center;
 }
 
+
+/* cart page */
+.cart-row {
+	margin-bottom:15px;
+	h2 {
+		text-align:center;
+	} img {
+		width:100%;
+	}
+}
 
 
 
